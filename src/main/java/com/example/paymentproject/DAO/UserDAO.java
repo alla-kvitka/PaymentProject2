@@ -60,7 +60,7 @@ public class UserDAO implements UserDaoInterface {
     }
 
     public User checkPassLogin(String login, String password) throws SQLException {
-        ResultSet rs = null;
+        ResultSet rs ;
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement ps = connection.prepareStatement("select * from `Users` " +
                      "where `user_login` = ? and `user_password` = ?")) {
