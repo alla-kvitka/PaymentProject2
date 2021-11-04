@@ -2,8 +2,6 @@ package com.example.paymentproject.conroller;
 
 import com.example.paymentproject.DAO.UserDAO;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,11 +25,8 @@ public class LoginController extends HttpServlet {
         String password = req.getParameter("password");
         UserDAO userDAO = new UserDAO();
         try {
-            if (userDAO.checkPassLogin(login, password)) {
-                String path = "/WEB-INF/views/user/homePage.jsp";
-                ServletContext servletContext = getServletContext();
-                RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
-                requestDispatcher.forward(req, resp);
+            if (userDAO.checkPassLogin(login, password)!=null) {
+                resp.sendRedirect(req.getContextPath() + "homepage");
             }
         } catch (SQLException e) {
             e.printStackTrace();

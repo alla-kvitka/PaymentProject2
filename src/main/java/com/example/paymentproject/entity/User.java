@@ -46,7 +46,7 @@ public class User  {
         this.user_password = user_password;
     }
 
-    public String getUser_email() {
+    public String getUser_email(String email) {
         return user_email;
     }
 
