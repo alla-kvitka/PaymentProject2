@@ -2,9 +2,9 @@ drop table users;
 
 CREATE TABLE users (
                        user_id bigint NOT NULL AUTO_INCREMENT,
-                       user_login varchar(16) NOT NULL UNIQUE,
-                       user_password varchar(16) NOT NULL,
-                       user_email varchar(16) NOT NULL,
+                       user_login varchar(32) NOT NULL UNIQUE,
+                       user_password varchar(32) NOT NULL,
+                       user_email varchar(128) NOT NULL UNIQUE,
                     --   user_name varchar(16) NOT NULL,
                     --  user_surname varchar(16) NOT NULL,
                        PRIMARY KEY (user_id)

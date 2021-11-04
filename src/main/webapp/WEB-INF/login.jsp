@@ -14,7 +14,6 @@
     <label>
         <input type = 'text' name='password'/>
     </label>
-    <h4>email</h4>
     </br>
     </br>
     <input type = 'submit' name='submit'/>

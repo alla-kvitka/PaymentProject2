@@ -1,33 +1,46 @@
 package com.example.paymentproject.conroller;
 
+import com.example.paymentproject.DAO.UserDAO;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 
 @WebServlet(name = "login", value = "/login")
 public class LoginController extends HttpServlet {
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1 align=\"center\">" + "Login" + "</h1>");
-        out.println("</body></html>");
-
-        response.getWriter().write("<html>"+"<head><head>"
-        +"<body bgcolor=\"#F5F5DC\" align=\"center\">"+"<h4>login</h4>"+"<form method = get>"+
-                "<input type = 'text' name=login/>"
-                + "<h4>password</h4>"+
-                "<form method = get>"+
-                "<input type = 'text' name=password/>"+
-                "</br>"+"</br>"+
-                "<form method = get>"+
-                "<input type = 'submit' name=submit/>");
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
+
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+       doGet(req, resp);
+        String login = req.getParameter("login");
+        String password = req.getParameter("password");
+        UserDAO userDAO = new UserDAO();
+        try {
+            if (userDAO.checkPassLogin(login, password)) {
+                String path = "/WEB-INF/views/user/homePage.jsp";
+                ServletContext servletContext = getServletContext();
+                RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(path);
+                requestDispatcher.forward(req, resp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public void destroy() {
     }
+
 }

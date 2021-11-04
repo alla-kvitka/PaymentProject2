@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static java.lang.System.out;
+
 @WebServlet(name = "registration", value = "/registration")
 public class RegistrationController extends HttpServlet {
 
@@ -28,12 +30,12 @@ public class RegistrationController extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         UserDAO userDAO = new UserDAO();
-
         if (userDAO.checkExistForUser(User.createUser(login, password, email))) {
             userDAO.insertUser(User.createUser(login, password, email));
             resp.sendRedirect("/WEB-INF/login.jsp");
         } else {
-            req.setAttribute("message", "User is already exist");
+            req.setAttribute("message", "User ia already exist");
+            req.setAttribute("login", login);
             req.getRequestDispatcher("/WEB-INF/registration.jsp").forward(req, resp);
         }
     }
