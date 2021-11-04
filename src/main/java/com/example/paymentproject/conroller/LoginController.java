@@ -34,7 +34,6 @@ public class LoginController extends HttpServlet {
     }
 
 
-
     public void destroy() {
     }
 
