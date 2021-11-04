@@ -26,7 +26,7 @@ public class LoginController extends HttpServlet {
         UserDAO userDAO = new UserDAO();
         try {
             if (userDAO.checkPassLogin(login, password)!=null) {
-                resp.sendRedirect(req.getContextPath() + "homepage");
+                resp.sendRedirect( "/homepage");
             }
         } catch (SQLException e) {
             e.printStackTrace();
