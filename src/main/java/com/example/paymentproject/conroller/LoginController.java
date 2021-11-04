@@ -1,4 +1,4 @@
-package com.example.paymentproject;
+package com.example.paymentproject.conroller;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @WebServlet(name = "login", value = "/login")
-public class LogIn extends HttpServlet {
+public class LoginController extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");

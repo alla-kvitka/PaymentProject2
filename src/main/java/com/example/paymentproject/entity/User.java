@@ -1,6 +1,6 @@
 package com.example.paymentproject.entity;
 
-public class User {
+public class User  {
     private long user_id;
     private String user_login;
     private String user_password;
