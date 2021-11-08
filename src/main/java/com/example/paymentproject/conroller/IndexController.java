@@ -7,16 +7,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "homepage", value = "/homepage")
-public class UserHomePageController extends HttpServlet {
+@WebServlet(name = "index", value = "/index")
+public class IndexController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/user/homePage.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 }

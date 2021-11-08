@@ -1,6 +1,7 @@
-package com.example.paymentproject.DAO;
+package com.example.paymentproject.DAO.Impl;
 
 
+import com.example.paymentproject.DAO.Impl.DBConnection;
 import com.example.paymentproject.DAO.iterfaces.UserDaoInterface;
 import com.example.paymentproject.entity.User;
 
@@ -10,7 +11,6 @@ import java.util.List;
 
 
 public class UserDAO implements UserDaoInterface {
-    DbConnection dbConnection = new DbConnection();
 
     @Override
     public void insertUser(User user) {
@@ -22,7 +22,7 @@ public class UserDAO implements UserDaoInterface {
             if (checkExistForUser(user)) {
                 pstmt.setString(1, user.getUser_login());
                 pstmt.setString(2, user.getUser_password());
-                pstmt.setString(3, user.getUser_email(rs.getString("email")));
+                pstmt.setString(3, user.getUser_email());
                 pstmt.executeUpdate();
                 rs = pstmt.getGeneratedKeys();
                 if (rs.next()) {
@@ -59,7 +59,7 @@ public class UserDAO implements UserDaoInterface {
         return !isUserExists;
     }
 
-    public User checkPassLogin(String login, String password) throws SQLException {
+    public boolean checkPassLogin(String login, String password) throws SQLException {
         ResultSet rs ;
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement ps = connection.prepareStatement("select * from `Users` " +
@@ -68,10 +68,10 @@ public class UserDAO implements UserDaoInterface {
             ps.setString(2, password);
             rs = ps.executeQuery();
             if (rs.next()) {
-                return getUser(login);
+                return true;
             }
         }
-        return null;
+        return false;
     }
 
     public User getUser(String login) {
@@ -85,7 +85,7 @@ public class UserDAO implements UserDaoInterface {
                 user = new User();
                 user.setUser_id(rs.getLong("id"));
                 user.setUser_login(rs.getString("login"));
-                user.getUser_email(rs.getString("email"));
+                user.setUser_email(rs.getString("email"));
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());
