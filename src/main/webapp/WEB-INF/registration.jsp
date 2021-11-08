@@ -11,10 +11,9 @@
 <div class="wrapper">
     <header role="banner">
         <nav role="navigation">
+            <h1><a href="index">Payments</a></h1>
             <ul class="nav-ul">
                 <dir></dir>
-                <dir><a href="index">Payments </a></dir>
-                <dir><a href="aboutUs">About Us</a></dir>
                 <dir><a href="registration">Registration</a></dir>
                 <dir><a href="login">LogIn</a></dir>
             </ul>
@@ -49,7 +48,6 @@
     <footer>
         <p class="copy" align="left">&copy; Alla Kvitka 2021</p>
     </footer>
-    <div class="line"></div>
 </div>
 </body>
 </html>

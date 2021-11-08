@@ -9,16 +9,18 @@
 <div class="wrapper">
     <header role="banner">
         <nav role="navigation">
+            <h1><a href="index">Payments</a></h1>
             <ul class="nav-ul">
                 <dir></dir>
-                <dir><a href="index">Payments </a></dir>
+                <dir></dir>
                 <dir><a href="registration">Registration</a></dir>
                 <dir><a href="login">LogIn</a></dir>
             </ul>
         </nav>
     </header>
-    <section  role="sec-intro">
-        <img  src="index.jpg"   align=”right”>
+    <section class="sec-intro" role="section">
+        <h1>Be Innovative!</h1>
+        <img src="index.jpg" alt=""/>
     </section>
 
     <footerindex>

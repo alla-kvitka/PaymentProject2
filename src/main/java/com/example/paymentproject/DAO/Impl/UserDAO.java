@@ -1,6 +1,7 @@
-package com.example.paymentproject.DAO;
+package com.example.paymentproject.DAO.Impl;
 
 
+import com.example.paymentproject.DAO.Impl.DBConnection;
 import com.example.paymentproject.DAO.iterfaces.UserDaoInterface;
 import com.example.paymentproject.entity.User;
 

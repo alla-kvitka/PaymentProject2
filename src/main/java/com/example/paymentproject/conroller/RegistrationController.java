@@ -1,6 +1,6 @@
 package com.example.paymentproject.conroller;
 
-import com.example.paymentproject.DAO.UserDAO;
+import com.example.paymentproject.DAO.Impl.UserDAO;
 import com.example.paymentproject.entity.User;
 
 import javax.servlet.ServletException;
