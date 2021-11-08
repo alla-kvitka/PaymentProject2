@@ -1,8 +1,7 @@
-package com.example.paymentproject.DAO.Impl;
+package com.example.paymentproject.dao.impl;
 
 
-import com.example.paymentproject.DAO.Impl.DBConnection;
-import com.example.paymentproject.DAO.iterfaces.UserDaoInterface;
+import com.example.paymentproject.dao.iterfaces.UserDaoInterface;
 import com.example.paymentproject.entity.User;
 
 import java.sql.*;

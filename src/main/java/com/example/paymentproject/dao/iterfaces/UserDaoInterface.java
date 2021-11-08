@@ -1,4 +1,4 @@
-package com.example.paymentproject.DAO.iterfaces;
+package com.example.paymentproject.dao.iterfaces;
 
 import com.example.paymentproject.entity.User;
 
@@ -10,6 +10,8 @@ public interface UserDaoInterface {
     void deleteUser(User user);
 
     User getUser(String login);
+
+    boolean checkExistForUser(User user);
 
     List<User> findAllUsers();
 

@@ -1,6 +1,6 @@
 package com.example.paymentproject;
 
-import com.example.paymentproject.DAO.Impl.UserDAO;
+import com.example.paymentproject.dao.impl.UserDAO;
 import com.example.paymentproject.entity.User;
 
 import java.sql.SQLException;

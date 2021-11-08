@@ -1,9 +1,10 @@
 package com.example.paymentproject.conroller;
 
-import com.example.paymentproject.DAO.Impl.UserDAO;
+import com.example.paymentproject.dao.impl.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ public class LoginController extends HttpServlet {
         UserDAO userDAO = new UserDAO();
         try {
             if (userDAO.checkPassLogin(login, password)) {
+                resp.addCookie((new Cookie("currentUser", login)));
                 resp.sendRedirect(req.getContextPath() + "/homepage");
             }
         } catch (SQLException e) {

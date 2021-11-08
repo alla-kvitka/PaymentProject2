@@ -1,4 +1,4 @@
-package com.example.paymentproject.DAO.iterfaces;
+package com.example.paymentproject.dao.iterfaces;
 
 import com.example.paymentproject.entity.Payment;
 

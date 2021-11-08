@@ -2,6 +2,7 @@ package com.example.paymentproject.conroller;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,6 +14,15 @@ public class UserHomePageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/views/user/homePage.jsp").forward(req, resp);
+        Cookie[] cookies = req.getCookies();
+        String login = null;
+        for (Cookie cookie:cookies) {
+            if (cookie.getValue().equals("currentUser")){
+                login = cookie.getValue();
+            }
+        }
+        System.out.println(login);
+        
     }
 
     @Override
