@@ -12,18 +12,22 @@
             <h1><a href="homepage">Home</a></h1>
             <ul class="nav-ul">
                 <dir></dir>
-                <dir><a href="#">My cards</a></dir>
-                <dir><a href="#">Transactions</a></dir>
-                <dir><a href="#">Payment</a></dir>
-                <dir><a href="index">LogOut</a></dir>
+                <dir><a href="user-cards">My cards</a></dir>
+                <dir><a href="transactions">Transactions</a></dir>
+                <dir><a href="payment">Payment</a></dir>
+                <dir><a href="logout">LogOut</a></dir>
             </ul>
         </nav>
     </header>
 
-
-
-
-
+    <h1>
+        <p><img src="avatar.jpg" width="250" height="250" align="middle">
+        <li>login: <%= request.getAttribute("login")%>
+        </li>
+        <li> email: <%= request.getAttribute("email")%>
+        </li>
+        </p>
+    </h1>
 
 
     <footer>

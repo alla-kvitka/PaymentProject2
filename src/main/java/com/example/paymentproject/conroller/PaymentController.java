@@ -1,4 +1,8 @@
 package com.example.paymentproject.conroller;
 
-public class PaymentController {
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet(name = "payment", value = "/payment")
+public class PaymentController extends HttpServlet {
 }

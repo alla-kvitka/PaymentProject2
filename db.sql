@@ -1,38 +1,51 @@
 drop table users;
 
-CREATE TABLE users (
-                       user_id bigint NOT NULL AUTO_INCREMENT,
-                       user_login varchar(32) NOT NULL UNIQUE,
-                       user_password varchar(32) NOT NULL,
-                       user_email varchar(128) NOT NULL UNIQUE,
-                    --   user_name varchar(16) NOT NULL,
-                    --  user_surname varchar(16) NOT NULL,
-                       PRIMARY KEY (user_id)
+CREATE TABLE users
+(
+    user_id       bigint       NOT NULL,
+    user_login    varchar(32)  NOT NULL UNIQUE,
+    user_password varchar(32)  NOT NULL,
+    user_email    varchar(128) NOT NULL UNIQUE,
+    user_role     varchar(16)  NOT NULL,
+    user_bill     bigint       NOT NULL NOT NULL,
+    --  user_surname varchar(16) NOT NULL,
+    --  user_name varchar(16) NOT NULL,
+    PRIMARY KEY (user_id)
 );
 
--- INSERT INTO users VALUES (1,'anet','4637','sgws@egre.com');
+INSERT INTO users
+VALUES (1, 'akvitka', '20121997', 'invariant17@gmail.com', 'ADMIN', 61234621487232);
+
+
+
 drop table cards;
 
-CREATE  TABLE cards (card_id bigint NOT NULL AUTO_INCREMENT,
-                     user_id bigint NOT NULL UNIQUE,
-                     card_sum bigint NOT NULL,
-                     bill_id bigint NOT NULL,
-                     card_status boolean,
-                     PRIMARY KEY (card_id)
+CREATE TABLE cards
+(
+    card_id     bigint NOT NULL,
+    user_id     bigint NOT NULL UNIQUE,
+    card_sum    bigint NOT NULL,
+    bill_id     bigint NOT NULL,
+    card_status varchar(26),
+    PRIMARY KEY (card_id)
 );
 drop table bill;
-CREATE  TABLE bill (bill_id bigint NOT NULL AUTO_INCREMENT,
-                    bill_sum bigint NOT NULL,
-                    bill_name varchar(16) NOT NULL,
-                    bill_status boolean NOT NULL,
+CREATE TABLE bill
+(
+    bill_id     bigint      NOT NULL AUTO_INCREMENT,
+    bill_sum    bigint      NOT NULL,
+    bill_name   varchar(16) NOT NULL,
+    bill_status boolean     NOT NULL,
 
-                    PRIMARY KEY (bill_id)
+    PRIMARY KEY (bill_id)
 );
 
 drop table Transaction_history;
-CREATE  TABLE Transaction_history(tr_id bigint NOT NULL AUTO_INCREMENT,
-                                  tr_date datetime,
-                                  tr_status varchar(16) NOT NULL,
-                                  card_id bigint NOT NULL,
-                                  PRIMARY KEY(tr_id)
+CREATE TABLE Transaction_history
+(
+    tr_id     bigint      NOT NULL AUTO_INCREMENT,
+    tr_date   datetime,
+    tr_status varchar(16) NOT NULL,
+    card_id   bigint      NOT NULL,
+    PRIMARY KEY (tr_id)
 );

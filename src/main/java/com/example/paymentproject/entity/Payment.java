@@ -5,10 +5,6 @@ public class Payment {
     private long paymentId;
 
 
-    public Payment(long paymentSum, long paymentId) {
-        this.paymentSum = paymentSum;
-        this.paymentId = paymentId;
-    }
 
 
 }

@@ -1,8 +1,7 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Card </title>
+    <title>Do Payment</title>
 </head>
 <body>
 <header role="banner">
@@ -17,6 +16,7 @@
         </ul>
     </nav>
 </header>
+
 
 
 

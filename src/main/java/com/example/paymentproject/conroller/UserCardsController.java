@@ -1,5 +1,6 @@
 package com.example.paymentproject.conroller;
 
+
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.impl.UserServiceImpl;
 
@@ -11,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "homepage", value = "/homepage")
-public class UserHomePageController extends HttpServlet {
+@WebServlet(name = "user-cards", value = "/user-cards")
+public class UserCardsController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,18 +24,14 @@ public class UserHomePageController extends HttpServlet {
                 login = cookie.getValue();
             }
         }
-
         UserServiceImpl userService = new UserServiceImpl();
         User user = userService.getUserInfo(login);
-        req.setAttribute("login", user.getUserLogin());
-        req.setAttribute("email", user.getUserEmail());
 
-        getServletContext().getRequestDispatcher("/WEB-INF/views/user/homePage.jsp").forward(req, resp);
-
+        req.getRequestDispatcher("/WEB-INF/views/card/cardInformation.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req, resp);
+        super.doPost(req, resp);
     }
 }
