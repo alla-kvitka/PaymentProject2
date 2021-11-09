@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Admin Home Page</title>
+    <title>Block card</title>
     <link rel="stylesheet" href="index.styl">
 </head>
 <body>
@@ -17,14 +17,9 @@
     </nav>
 </header>
 
-<h1>
-    <p><img src="avatar.jpg" width="250" height="250" align="middle">
-    <li>login: <%= request.getAttribute("login")%>
-    </li>
-    <li> email: <%= request.getAttribute("email")%>
-    </li>
-    </p>
-</h1>
+
+
+
 
 <footer>
     <p class="copy" align="left">&copy; Alla Kvitka 2021</p>
