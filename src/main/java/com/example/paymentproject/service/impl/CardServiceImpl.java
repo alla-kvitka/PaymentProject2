@@ -16,11 +16,6 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public Card allUserCards(int user_id) {
-        return cardDao.searchUserCards(user_id);
-    }
-
-    @Override
     public Card searchCardById(int cardId) {
         return cardDao.searchCardById(cardId);
     }

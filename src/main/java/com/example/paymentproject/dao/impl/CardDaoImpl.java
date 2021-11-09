@@ -11,7 +11,7 @@ import java.util.List;
 
 public class CardDaoImpl implements CardDao {
     @Override
-    public Card insertCard(Card card) throws SQLException {
+    public Card insertCard(Card card) {
         int random = Utils.randomInt();
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
@@ -31,28 +31,6 @@ public class CardDaoImpl implements CardDao {
         return card;
     }
 
-    @Override
-    public Card searchUserCards(int id) {
-        Card card = null;
-        ResultSet rs = null;
-        try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement ps = connection.prepareStatement("SELECT * FROM CARDS WHERE user_id=?")) {
-            ps.setLong(1, id);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                card = new Card();
-                card.setCardId(rs.getInt("card_id"));
-                card.setUserId(rs.getInt("user_id"));
-                card.setCardSum(rs.getLong("card_sum"));
-                card.setCardStatus(CardStatus.valueOf(rs.getString("card_status")));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getErrorCode());
-        } finally {
-            close(rs);
-        }
-        return card;
-    }
 
     @Override
     public Card searchCardById(int cardId) {
@@ -64,6 +42,7 @@ public class CardDaoImpl implements CardDao {
             result = pstm.executeQuery();
             if (result.next()) {
                 card = new Card();
+                card.setBillId(result.getLong("bill_id"));
                 card.setCardId(result.getInt("card_id"));
                 card.setUserId(result.getInt("user_id"));
                 card.setCardSum(result.getLong("card_sum"));

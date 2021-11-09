@@ -30,9 +30,7 @@ public class UserCardsController extends HttpServlet {
         UserServiceImpl userService = new UserServiceImpl();
         CardServiceImpl cardService = new CardServiceImpl();
         User user = userService.getUserInfo(login);
-        Card card = cardService.allUserCards(user.getUserId());
-        List<Card> cards = cardService.findAllUsersCards(user.getUserId());
-        req.setAttribute("cards", cards);
+        Card card = cardService.searchCardById(user.getUserId());
         req.setAttribute("cardId", String.valueOf(card.getCardId()));
         req.setAttribute("cardSum", card.getCardSum());
         req.setAttribute("cardStatus", card.isCardStatus());
@@ -41,6 +39,6 @@ public class UserCardsController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+       doGet(req, resp);
     }
 }

@@ -1,29 +1,28 @@
 package com.example.paymentproject.entity;
 
-import com.example.paymentproject.entity.Enums.CardStatus;
-import com.example.paymentproject.entity.Enums.TransactionType;
-
 public class Payment {
     private int userId;
     private int paymentSum;
     private int paymentId;
     private int cardId;
     private long billId;
-    private TransactionType transactionType;
-
+    private String transactionType;
+    private int status;
     public Payment() {
     }
 
     public Payment(int paymentSum, int paymentId, int cardId, long billId,
-                   TransactionType transactionType) {
+                   String transactionType, int status) {
         this.paymentSum = paymentSum;
         this.paymentId = paymentId;
         this.cardId = cardId;
         this.billId = billId;
         this.transactionType = transactionType;
+        this.status=status;
     }
 
-    public static Payment createPayment(Card card, TransactionType transactionType,
+
+    public static Payment createPayment(Card card, String transactionType,
                                         int sum) {
         Payment payment = new Payment();
         payment.setUserId(card.getUserId());
@@ -31,7 +30,16 @@ public class Payment {
         payment.setPaymentSum(sum);
         payment.setTransactionType(transactionType);
         payment.setBillId(card.getBillId());
+        payment.setStatus(0);
         return payment;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public int getUserId() {
@@ -74,11 +82,11 @@ public class Payment {
         this.billId = billId;
     }
 
-    public TransactionType getTransactionType() {
+    public String getTransactionType() {
         return transactionType;
     }
 
-    public void setTransactionType(TransactionType transactionType) {
+    public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
 }

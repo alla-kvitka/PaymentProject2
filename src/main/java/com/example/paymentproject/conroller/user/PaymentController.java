@@ -1,7 +1,7 @@
 package com.example.paymentproject.conroller.user;
 
+import com.example.paymentproject.dao.impl.PaymentDaoImpl;
 import com.example.paymentproject.entity.Card;
-import com.example.paymentproject.entity.Enums.TransactionType;
 import com.example.paymentproject.entity.Payment;
 import com.example.paymentproject.service.impl.CardServiceImpl;
 
@@ -25,17 +25,23 @@ public class PaymentController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int cardId = Integer.parseInt(req.getParameter("userCardId"));
         int paymentSum = Integer.parseInt(req.getParameter("sum"));
-        TransactionType trType = TransactionType.valueOf(req.getParameter("trType"));
+        String trType = req.getParameter("trType");
         Card card = cardService.searchCardById(cardId);
-        if (trType.equals(TransactionType.NEGATIVE)) {
+        PaymentDaoImpl paymentDao = new PaymentDaoImpl();
+
+        if (trType.equalsIgnoreCase("NEGATIVE")) {
             if (card.getCardSum() <= paymentSum) {
                 req.getRequestDispatcher("/WEB-INF/views/user/payments/doPayment.jsp").forward(req, resp);
             } else {
-
-
+              Payment payment =  paymentDao.insertPayment(Payment.createPayment(card, trType, paymentSum));
+                resp.sendRedirect(req.getContextPath() + "/paymentSubmit");
             }
-
         }
-
+        if (trType.equalsIgnoreCase("POSITIVE")) {
+            Payment payment =   paymentDao.insertPayment(Payment.createPayment(card, trType, paymentSum));
+            resp.sendRedirect(req.getContextPath() + "/paymentSubmit");
+        }
     }
+
+
 }

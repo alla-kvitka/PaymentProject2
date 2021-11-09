@@ -1,4 +1,4 @@
-<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%--<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -22,27 +22,27 @@
         </nav>
     </header>
 
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Sum</th>
-                <th>Status</th>
-            </tr>
-            <p></p>
-            <c:forEach items="${requestScope.cards}" var="card">
-                <tr>
-                    <td>
-                        <c:out value="${card.cardId}"/>
-                    </td>
-                    <td>
-                        <c:out value="${card.cardSum}"/>
-                    </td>
-                    <td>
-                        <c:out value="${card.isCardStatus()}"/>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
+<%--        <table>--%>
+<%--            <tr>--%>
+<%--                <th>ID</th>--%>
+<%--                <th>Sum</th>--%>
+<%--                <th>Status</th>--%>
+<%--            </tr>--%>
+<%--            <p></p>--%>
+<%--            <c:forEach items="${requestScope.cards}" var="card">--%>
+<%--                <tr>--%>
+<%--                    <td>--%>
+<%--                        <c:out value="${card.cardId}"/>--%>
+<%--                    </td>--%>
+<%--                    <td>--%>
+<%--                        <c:out value="${card.cardSum}"/>--%>
+<%--                    </td>--%>
+<%--                    <td>--%>
+<%--                        <c:out value="${card.isCardStatus()}"/>--%>
+<%--                    </td>--%>
+<%--                </tr>--%>
+<%--            </c:forEach>--%>
+<%--        </table>--%>
 
     <h1 align="center">Your Cards</h1>
     <h2>

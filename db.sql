@@ -43,14 +43,15 @@ CREATE TABLE bill
 drop table Transaction_history;
 CREATE TABLE Transaction_history
 (
+
     tr_id        bigint      NOT NULL,
+    bill_id      bigint      NOT NULL,
+    card_id      bigint      NOT NULL,
     tr_date      datetime,
+    payment_sum  bigint      NOT NULL,
+    payment_type varchar(16) NOT NULL,
     tr_status    varchar(16) NOT NULL,
     payment_id   bigint      NOT NULL,
-    card_id      bigint      NOT NULL,
-    bill_id      bigint      NOT NULL,
-    payment_type varchar(16) NOT NULL,
-    payment_sum  bigint      NOT NULL,
     PRIMARY KEY (tr_id)
 );
 
@@ -58,11 +59,12 @@ drop table payments;
 
 CREATE TABLE payments
 (
-    payment_id   bigint      NOT NULL,
-    card_id      bigint      NOT NULL,
-    bill_id      bigint      NOT NULL,
-    payment_type varchar(16) NOT NULL,
-    payment_sum  bigint      NOT NULL,
-
+    user_id        bigint      NOT NULL,
+    payment_id     bigint      NOT NULL UNIQUE,
+    bill_id        bigint      NOT NULL,
+    card_id        bigint      NOT NULL,
+    payment_sum    bigint      NOT NULL,
+    payment_type   varchar(16) NOT NULL,
+    payment_status int         NOT NULL,
     PRIMARY KEY (payment_id)
 );
