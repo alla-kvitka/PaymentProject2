@@ -1,9 +1,9 @@
 package com.example.paymentproject.conroller.user;
 
-import com.example.paymentproject.dao.impl.PaymentDaoImpl;
 import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.Payment;
 import com.example.paymentproject.service.impl.CardServiceImpl;
+import com.example.paymentproject.service.impl.PaymentServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,18 +27,18 @@ public class PaymentController extends HttpServlet {
         int paymentSum = Integer.parseInt(req.getParameter("sum"));
         String trType = req.getParameter("trType");
         Card card = cardService.searchCardById(cardId);
-        PaymentDaoImpl paymentDao = new PaymentDaoImpl();
+        PaymentServiceImpl paymentService = new PaymentServiceImpl();
 
         if (trType.equalsIgnoreCase("NEGATIVE")) {
             if (card.getCardSum() <= paymentSum) {
                 req.getRequestDispatcher("/WEB-INF/views/user/payments/doPayment.jsp").forward(req, resp);
             } else {
-              Payment payment =  paymentDao.insertPayment(Payment.createPayment(card, trType, paymentSum));
+                paymentService.insertPayment(Payment.createPayment(card, trType, paymentSum));
                 resp.sendRedirect(req.getContextPath() + "/paymentSubmit");
             }
         }
         if (trType.equalsIgnoreCase("POSITIVE")) {
-            Payment payment =   paymentDao.insertPayment(Payment.createPayment(card, trType, paymentSum));
+            paymentService.insertPayment(Payment.createPayment(card, trType, paymentSum));
             resp.sendRedirect(req.getContextPath() + "/paymentSubmit");
         }
     }
