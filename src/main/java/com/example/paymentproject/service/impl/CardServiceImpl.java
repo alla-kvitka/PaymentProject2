@@ -26,13 +26,13 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public boolean blockCard(Card card) {
-        return false;
+    public void blockCard(int cardId) {
+        cardDao.blockCard(cardId);
     }
 
     @Override
-    public boolean unBlockCard(Card card) {
-        return false;
+    public void unBlockCard(int cardId) {
+        cardDao.unBlockCard(cardId);
     }
 
     @Override

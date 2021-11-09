@@ -62,13 +62,29 @@ public class CardDaoImpl implements CardDao {
     }
 
     @Override
-    public boolean blockCard(Card card) {
-        return false;
+    public void blockCard(int cardId) {
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("UPDATE CARDS SET card_status=? WHERE card_id=?")) {
+            pstmt.setString(1, "BLOCKED");
+            pstmt.setLong(2, cardId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
-    public boolean unBlockCard(Card card) {
-        return false;
+    public void unBlockCard(int cardId) {
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("UPDATE CARDS SET card_status=? WHERE card_id=?")) {
+            pstmt.setString(1, "ACTIVE");
+            pstmt.setLong(2, cardId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -12,9 +12,9 @@ public interface CardService {
 
     void deleteCard(Card card);
 
-    boolean blockCard(Card card);
+    void blockCard(int cardId);
 
-    boolean unBlockCard(Card card);
+    void unBlockCard(int cardId);
 
     public List<Card> findAllUsersCards(int userid);
 
