@@ -1,10 +1,10 @@
 package com.example.paymentproject.dao.impl;
 
 
-import com.example.paymentproject.utils.Utils;
 import com.example.paymentproject.dao.iterfaces.UserDao;
 import com.example.paymentproject.entity.Enums.Role;
 import com.example.paymentproject.entity.User;
+import com.example.paymentproject.utils.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -46,6 +46,7 @@ public class UserDaoImpl implements UserDao {
 
     }
 
+    @Override
     public boolean checkExistForUser(User user) {
         boolean isUserExists = false;
         ResultSet rs = null;
@@ -64,6 +65,7 @@ public class UserDaoImpl implements UserDao {
         return !isUserExists;
     }
 
+    @Override
     public boolean checkPassLogin(String login, String password) throws SQLException {
         ResultSet rs;
         try (Connection connection = DBConnection.getInstance().getConnection();
@@ -79,6 +81,7 @@ public class UserDaoImpl implements UserDao {
         return false;
     }
 
+    @Override
     public User getUser(String login) {
         User user = null;
         ResultSet rs = null;
@@ -102,6 +105,7 @@ public class UserDaoImpl implements UserDao {
         return user;
     }
 
+    @Override
     public List<User> findAllUsers() {
         List<User> users = new ArrayList<>();
         ResultSet rs = null;

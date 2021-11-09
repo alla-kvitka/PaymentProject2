@@ -1,8 +1,8 @@
 package com.example.paymentproject.conroller;
 
-import com.example.paymentproject.dao.impl.CardDaoImpl;
 import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.User;
+import com.example.paymentproject.service.impl.CardServiceImpl;
 import com.example.paymentproject.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
@@ -31,7 +31,7 @@ public class RegistrationController extends HttpServlet {
         String passwordRepeat = req.getParameter("password-repeat");
         String email = req.getParameter("email");
         UserServiceImpl userService = new UserServiceImpl();
-        CardDaoImpl cardDao = new CardDaoImpl();
+        CardServiceImpl cardService = new CardServiceImpl();
 
         if (login.equals("") || password.equals("") || passwordRepeat.equals("")
                 || email.equals(""))
@@ -40,7 +40,7 @@ public class RegistrationController extends HttpServlet {
                 && password.equals(passwordRepeat)) {
             User user = userService.createUser(User.createUser(login, password, email));
             try {
-                cardDao.insertCard(Card.createCard(user));
+                cardService.insertCard(Card.createCard(user));
             } catch (SQLException e) {
                 e.printStackTrace();
             }

@@ -9,11 +9,12 @@ public class Card {
     private long billId;
     private CardStatus cardStatus;
 
-    public Card(int cardId, int userId, long cardSum, long billId) {
+    public Card(int cardId, int userId, long cardSum, long billId, CardStatus cardStatus) {
         this.cardId = cardId;
         this.userId = userId;
         this.cardSum = cardSum;
         this.billId = billId;
+        this.cardStatus = cardStatus;
     }
 
     public Card() {
@@ -28,7 +29,7 @@ public class Card {
         return card;
     }
 
-    public long getCardId() {
+    public int getCardId() {
         return cardId;
     }
 

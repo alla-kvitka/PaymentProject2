@@ -1,6 +1,6 @@
 package com.example.paymentproject.conroller;
 
-import com.example.paymentproject.dao.impl.UserDaoImpl;
+import com.example.paymentproject.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,15 +19,15 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        UserDaoImpl userDaoImpl = new UserDaoImpl();
+        UserServiceImpl userService = new UserServiceImpl();
         try {
-            if (userDaoImpl.checkPassLogin(login, password)) {
+            if (userService.loginCheck(login, password)) {
                 HttpSession oldSession = req.getSession(false);
                 if (oldSession != null) {
                     oldSession.invalidate();
                 }
                 HttpSession newSession = req.getSession(true);
-                newSession.setMaxInactiveInterval(5*60);
+                newSession.setMaxInactiveInterval(5 * 60);
                 Cookie message = new Cookie("currentUser", login);
                 resp.addCookie(message);
                 resp.sendRedirect(req.getContextPath() + "/homepage");

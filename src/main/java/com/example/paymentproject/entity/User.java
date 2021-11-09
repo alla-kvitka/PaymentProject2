@@ -2,13 +2,14 @@ package com.example.paymentproject.entity;
 
 import com.example.paymentproject.entity.Enums.Role;
 
-public class User  {
+public class User {
     private int userId;
     private String userLogin;
     private String userPassword;
     private String userEmail;
     private Role role;
     private long userBill;
+
     public User() {
     }
 
@@ -21,6 +22,7 @@ public class User  {
         user.setRole(Role.USER);
         return user;
     }
+
     public User(String user_login, String user_password, String user_email) {
         this.userLogin = user_login;
         this.userPassword = user_password;

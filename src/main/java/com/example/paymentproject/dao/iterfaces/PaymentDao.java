@@ -4,5 +4,5 @@ import com.example.paymentproject.entity.Payment;
 
 public interface PaymentDao {
 
-    Payment createPayment ();
+    Payment createPayment();
 }

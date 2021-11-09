@@ -2,6 +2,8 @@
 <html>
 <head>
     <title>Do Payment</title>
+    <link rel="stylesheet" href="index.styl">
+
 </head>
 <body>
 <header role="banner">

@@ -1,7 +1,9 @@
 package com.example.paymentproject.conroller;
 
 
+import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.User;
+import com.example.paymentproject.service.impl.CardServiceImpl;
 import com.example.paymentproject.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
@@ -25,9 +27,15 @@ public class UserCardsController extends HttpServlet {
             }
         }
         UserServiceImpl userService = new UserServiceImpl();
+        CardServiceImpl cardService = new CardServiceImpl();
         User user = userService.getUserInfo(login);
-
-        req.getRequestDispatcher("/WEB-INF/views/card/cardInformation.jsp").forward(req, resp);
+        Card card = cardService.allUserCards(user.getUserId());
+//        List<Card> cards = cardDao.findAllUsersCards(user.getUserId());
+//        req.setAttribute("cards", cards);
+        req.setAttribute("cardId", String.valueOf(card.getCardId()));
+        req.setAttribute("cardSum", card.getCardSum());
+        req.setAttribute("cardStatus", card.isCardStatus());
+        getServletContext().getRequestDispatcher("/WEB-INF/views/card/cardInformation.jsp").forward(req, resp);
     }
 
     @Override

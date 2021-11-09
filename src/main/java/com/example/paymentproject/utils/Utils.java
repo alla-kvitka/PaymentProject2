@@ -8,6 +8,7 @@ public class Utils {
         SecureRandom rng = new SecureRandom();
         return Math.abs(rng.nextLong());
     }
+
     public static int randomInt() {
         SecureRandom rng = new SecureRandom();
         return Math.abs(rng.nextInt());
