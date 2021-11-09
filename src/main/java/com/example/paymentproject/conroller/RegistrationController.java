@@ -1,9 +1,9 @@
 package com.example.paymentproject.conroller;
 
-import com.example.paymentproject.dao.impl.UserDAO;
+import com.example.paymentproject.dao.impl.CardDaoImpl;
+import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.impl.UserServiceImpl;
-import com.example.paymentproject.service.interfaces.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 @WebServlet(name = "registration", value = "/registration")
@@ -27,15 +28,24 @@ public class RegistrationController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
+        String passwordRepeat = req.getParameter("password-repeat");
         String email = req.getParameter("email");
         UserServiceImpl userService = new UserServiceImpl();
+        CardDaoImpl cardDao = new CardDaoImpl();
 
-        if (userService.checkExistForUser(User.createUser(login, password, email))) {
-            userService.createUser(User.createUser(login, password, email));
+        if (login.equals("") || password.equals("") || passwordRepeat.equals("")
+                || email.equals(""))
+            req.getRequestDispatcher("/WEB-INF/registration.jsp").forward(req, resp);
+        else if (userService.checkExistForUser(User.createUser(login, password, email))
+                && password.equals(passwordRepeat)) {
+            User user = userService.createUser(User.createUser(login, password, email));
+            try {
+                cardDao.insertCard(Card.createCard(user));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
             resp.sendRedirect(req.getContextPath() + "/login");
         } else {
-            req.setAttribute("message", "User ia already exist");
-            req.setAttribute("login", login);
             req.getRequestDispatcher("/WEB-INF/registration.jsp").forward(req, resp);
         }
     }

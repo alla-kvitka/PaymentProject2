@@ -4,8 +4,8 @@ import com.example.paymentproject.entity.User;
 
 import java.util.List;
 
-public interface UserDaoInterface {
-    void insertUser(User user);
+public interface UserDao {
+    User insertUser(User user);
 
     void deleteUser(User user);
 

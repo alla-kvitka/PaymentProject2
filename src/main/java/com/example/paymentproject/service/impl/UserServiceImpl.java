@@ -1,28 +1,28 @@
 package com.example.paymentproject.service.impl;
 
-import com.example.paymentproject.dao.impl.UserDAO;
+import com.example.paymentproject.dao.impl.UserDaoImpl;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.interfaces.UserService;
 
 public class UserServiceImpl implements UserService {
-    UserDAO userDAO = new UserDAO();
+    UserDaoImpl userDaoImpl = new UserDaoImpl();
 
     @Override
-    public void createUser(User user) {
-        userDAO.insertUser(user);
+    public User createUser(User user) {
+       return userDaoImpl.insertUser(user);
     }
 
     @Override
     public void deleteUser(User user) {
-        userDAO.deleteUser(user);
+        userDaoImpl.deleteUser(user);
     }
 
     @Override
     public User getUserInfo(String login) {
-        return userDAO.getUser(login);
+        return userDaoImpl.getUser(login);
     }
 
     public boolean checkExistForUser(User user) {
-        return userDAO.checkExistForUser(user);
+        return userDaoImpl.checkExistForUser(user);
     }
 }

@@ -1,7 +1,9 @@
 package com.example.paymentproject.dao.impl;
 
 
-import com.example.paymentproject.dao.iterfaces.UserDaoInterface;
+import com.example.paymentproject.utils.Utils;
+import com.example.paymentproject.dao.iterfaces.UserDao;
+import com.example.paymentproject.entity.Enums.Role;
 import com.example.paymentproject.entity.User;
 
 import java.sql.*;
@@ -9,43 +11,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class UserDAO implements UserDaoInterface {
+public class UserDaoImpl implements UserDao {
 
     @Override
-    public void insertUser(User user) {
+    public User insertUser(User user) {
         ResultSet rs = null;
+        long randomBill = Utils.randomLong();
+        int userIdRandom = Utils.randomInt();
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
-                     ("INSERT INTO USERS VALUES (DEFAULT, ?, ?, ?)",
+                     ("INSERT INTO USERS VALUES (?, ?, ?, ?,?,?)",
                              Statement.RETURN_GENERATED_KEYS)) {
             if (checkExistForUser(user)) {
-                pstmt.setString(1, user.getUser_login());
-                pstmt.setString(2, user.getUser_password());
-                pstmt.setString(3, user.getUser_email());
+                user.setUserId(userIdRandom);
+                user.setUserBill(randomBill);
+
+                pstmt.setLong(1, user.getUserId());
+                pstmt.setString(2, user.getUserLogin());
+                pstmt.setString(3, user.getUserPassword());
+                pstmt.setString(4, user.getUserEmail());
+                pstmt.setString(5, user.getRole().toString());
+                pstmt.setLong(6, user.getUserBill());
                 pstmt.executeUpdate();
-                rs = pstmt.getGeneratedKeys();
-                if (rs.next()) {
-                    long idField = rs.getLong(1);
-                    user.setUser_id(idField);
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } finally {
-            close(rs);
         }
+        return user;
     }
 
     @Override
     public void deleteUser(User user) {
+
+
     }
 
     public boolean checkExistForUser(User user) {
         boolean isUserExists = false;
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement ps = connection.prepareStatement("select 1 from `Users` where `Login` = ?")) {
-            ps.setString(1, user.getUser_login());
+             PreparedStatement ps = connection.prepareStatement("select * from `Users` where `Login` = ?")) {
+            ps.setString(1, user.getUserLogin());
             rs = ps.executeQuery();
             if (rs.next()) {
                 isUserExists = true;
@@ -59,7 +65,7 @@ public class UserDAO implements UserDaoInterface {
     }
 
     public boolean checkPassLogin(String login, String password) throws SQLException {
-        ResultSet rs ;
+        ResultSet rs;
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement ps = connection.prepareStatement("select * from `Users` " +
                      "where `user_login` = ? and `user_password` = ?")) {
@@ -77,14 +83,16 @@ public class UserDAO implements UserDaoInterface {
         User user = null;
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement ps = connection.prepareStatement("SELECT * FROM users WHERE login=?")) {
+             PreparedStatement ps = connection.prepareStatement("SELECT * FROM `users` WHERE `user_login`= ?")) {
             ps.setString(1, login);
             rs = ps.executeQuery();
             if (rs.next()) {
                 user = new User();
-                user.setUser_id(rs.getLong("id"));
-                user.setUser_login(rs.getString("login"));
-                user.setUser_email(rs.getString("email"));
+                user.setUserId(rs.getInt("user_id"));
+                user.setUserPassword(rs.getString("user_password"));
+                user.setUserLogin(rs.getString("user_login"));
+                user.setUserEmail(rs.getString("user_email"));
+                user.setRole(Role.valueOf(rs.getString("user_role")));
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());

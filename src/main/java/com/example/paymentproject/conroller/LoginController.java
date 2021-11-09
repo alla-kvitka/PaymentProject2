@@ -1,13 +1,10 @@
 package com.example.paymentproject.conroller;
 
-import com.example.paymentproject.dao.impl.UserDAO;
+import com.example.paymentproject.dao.impl.UserDaoImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -19,13 +16,20 @@ public class LoginController extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-        UserDAO userDAO = new UserDAO();
+        UserDaoImpl userDaoImpl = new UserDaoImpl();
         try {
-            if (userDAO.checkPassLogin(login, password)) {
-                resp.addCookie((new Cookie("currentUser", login)));
+            if (userDaoImpl.checkPassLogin(login, password)) {
+                HttpSession oldSession = req.getSession(false);
+                if (oldSession != null) {
+                    oldSession.invalidate();
+                }
+                HttpSession newSession = req.getSession(true);
+                newSession.setMaxInactiveInterval(5*60);
+                Cookie message = new Cookie("currentUser", login);
+                resp.addCookie(message);
                 resp.sendRedirect(req.getContextPath() + "/homepage");
             }
         } catch (SQLException e) {

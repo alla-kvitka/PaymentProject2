@@ -1,5 +1,8 @@
 package com.example.paymentproject.conroller;
 
+import com.example.paymentproject.entity.User;
+import com.example.paymentproject.service.impl.UserServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -13,16 +16,21 @@ public class UserHomePageController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/user/homePage.jsp").forward(req, resp);
         Cookie[] cookies = req.getCookies();
         String login = null;
-        for (Cookie cookie:cookies) {
-            if (cookie.getValue().equals("currentUser")){
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("currentUser")) {
                 login = cookie.getValue();
             }
         }
-        System.out.println(login);
-        
+
+        UserServiceImpl userService = new UserServiceImpl();
+        User user = userService.getUserInfo(login);
+        req.setAttribute("login", user.getUserLogin());
+        req.setAttribute("email", user.getUserEmail());
+
+        getServletContext().getRequestDispatcher("/WEB-INF/views/user/homePage.jsp").forward(req, resp);
+
     }
 
     @Override
