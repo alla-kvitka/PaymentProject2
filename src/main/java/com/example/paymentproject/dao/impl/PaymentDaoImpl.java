@@ -2,10 +2,12 @@ package com.example.paymentproject.dao.impl;
 
 import com.example.paymentproject.dao.iterfaces.PaymentDao;
 import com.example.paymentproject.entity.Payment;
+import com.example.paymentproject.entity.Transaction;
 import com.example.paymentproject.utils.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PaymentDaoImpl implements PaymentDao {
@@ -35,6 +37,29 @@ public class PaymentDaoImpl implements PaymentDao {
         List<Payment> createdPayments = searchAllCreatedPayments(userId);
         for (Payment payment : createdPayments) {
             submitPayment(payment);
+            addToHistory(payment);
+        }
+    }
+
+    public void addToHistory(Payment payment) {
+        Timestamp timestamp = new Timestamp(new Date().getTime());
+        int random = Utils.randomInt();
+        Transaction transaction = Transaction.createTransaction(payment);
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("INSERT INTO TRANSACTION_HISTORY VALUES (?, ?, ?, ?,?,?,?,?)")) {
+            transaction.setTrId(random);
+            transaction.setDate(String.valueOf(timestamp));
+            pstmt.setInt(1, transaction.getUserId());
+            pstmt.setInt(2, transaction.getTrId());
+            pstmt.setLong(3, transaction.getBillId());
+            pstmt.setInt(4, transaction.getCardId());
+            pstmt.setTimestamp(5, timestamp);
+            pstmt.setInt(6, transaction.getPaymentSum());
+            pstmt.setInt(7, transaction.getStatus());
+            pstmt.setLong(8, transaction.getPaymentId());
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

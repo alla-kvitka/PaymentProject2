@@ -43,7 +43,7 @@ CREATE TABLE bill
 drop table Transaction_history;
 CREATE TABLE Transaction_history
 (
-
+    user_id      bigint      NOT NULL,
     tr_id        bigint      NOT NULL,
     bill_id      bigint      NOT NULL,
     card_id      bigint      NOT NULL,
