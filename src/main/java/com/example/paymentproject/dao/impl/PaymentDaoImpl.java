@@ -33,6 +33,7 @@ public class PaymentDaoImpl implements PaymentDao {
         return payment;
     }
 
+    @Override
     public void submitAllPaymentsForUser(int userId) {
         List<Payment> createdPayments = searchAllCreatedPayments(userId);
         for (Payment payment : createdPayments) {
@@ -41,6 +42,7 @@ public class PaymentDaoImpl implements PaymentDao {
         }
     }
 
+    @Override
     public void addToHistory(Payment payment) {
         Timestamp timestamp = new Timestamp(new Date().getTime());
         int random = Utils.randomInt();
@@ -63,6 +65,7 @@ public class PaymentDaoImpl implements PaymentDao {
         }
     }
 
+    @Override
     public void submitPayment(Payment payment) {
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement("UPDATE PAYMENTS SET payment_status=? WHERE payment_id=?")) {
@@ -74,7 +77,7 @@ public class PaymentDaoImpl implements PaymentDao {
         }
     }
 
-
+    @Override
     public List<Payment> searchAllCreatedPayments(int userId) {
         List<Payment> createdPayments = new ArrayList<>();
         ResultSet rs = null;
