@@ -1,4 +1,4 @@
-package com.example.paymentproject.conroller;
+package com.example.paymentproject.conroller.user;
 
 
 import com.example.paymentproject.entity.Card;
