@@ -15,7 +15,6 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public User insertUser(User user) {
-        ResultSet rs = null;
         long randomBill = Utils.randomLong();
         int userIdRandom = Utils.randomInt();
         try (Connection connection = DBConnection.getInstance().getConnection();
