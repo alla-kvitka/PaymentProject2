@@ -23,14 +23,11 @@ public class UserHomePageController extends HttpServlet {
                 login = cookie.getValue();
             }
         }
-
         UserServiceImpl userService = new UserServiceImpl();
         User user = userService.getUserInfo(login);
         req.setAttribute("login", user.getUserLogin());
         req.setAttribute("email", user.getUserEmail());
-
         getServletContext().getRequestDispatcher("/WEB-INF/views/user/homePage.jsp").forward(req, resp);
-
     }
 
     @Override

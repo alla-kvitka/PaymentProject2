@@ -1,4 +1,6 @@
 package com.example.paymentproject.service.impl;
 
-public class PaymentServiceImpl {
+import com.example.paymentproject.service.interfaces.PaymentService;
+
+public class PaymentServiceImpl implements PaymentService {
 }

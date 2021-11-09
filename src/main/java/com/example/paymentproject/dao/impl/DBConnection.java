@@ -1,15 +1,16 @@
 package com.example.paymentproject.dao.impl;
 
 
-
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 public class DBConnection {
-//    private static final Logger LOGGER = Logger.getLogger(DBConnection.class);
     static DBConnection instance;
     public DataSource dataSource;
 
@@ -28,12 +29,11 @@ public class DBConnection {
             dataSource = (DataSource) envContext.lookup("jdbc/Payments");
         } catch (Throwable e) {
             System.out.println("Ne bere");
-//            LOGGER.("Cannot init DBManager", e);
         }
     }
 
 
-    public Connection getConnection() throws SQLException{
+    public Connection getConnection() throws SQLException {
         return dataSource.getConnection();
     }
 
@@ -43,7 +43,6 @@ public class DBConnection {
             connection.commit();
             connection.close();
         } catch (SQLException e) {
-//            LOGGER.warning("Cannot commit and close", e);
         }
     }
 
@@ -53,7 +52,6 @@ public class DBConnection {
             connection.rollback();
             connection.close();
         } catch (SQLException e) {
-//            LOGGER.warning("Cannot rollback and close", e);
         }
     }
 
@@ -63,7 +61,6 @@ public class DBConnection {
             try {
                 statement.close();
             } catch (SQLException e) {
-//                LOGGER.warning("Cannot close statement", e);
             }
         }
     }
@@ -74,7 +71,6 @@ public class DBConnection {
             try {
                 resultSet.close();
             } catch (SQLException e) {
-//                LOGGER.warning("Cannot close resultSet", e);
             }
         }
     }

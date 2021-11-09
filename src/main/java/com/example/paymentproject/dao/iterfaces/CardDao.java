@@ -3,6 +3,7 @@ package com.example.paymentproject.dao.iterfaces;
 import com.example.paymentproject.entity.Card;
 
 import java.sql.SQLException;
+import java.util.List;
 
 public interface CardDao {
 
@@ -10,5 +11,12 @@ public interface CardDao {
 
     Card searchUserCards(int user_id);
 
+    void deleteCard(Card card);
+
+    boolean blockCard(Card card);
+
+    boolean unBlockCard(Card card);
+
+    public List<Card> findAllUsersCards(int userid);
 
 }

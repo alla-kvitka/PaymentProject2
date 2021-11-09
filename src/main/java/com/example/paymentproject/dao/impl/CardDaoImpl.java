@@ -1,10 +1,9 @@
 package com.example.paymentproject.dao.impl;
 
-import com.example.paymentproject.entity.User;
-import com.example.paymentproject.utils.Utils;
 import com.example.paymentproject.dao.iterfaces.CardDao;
 import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.Enums.CardStatus;
+import com.example.paymentproject.utils.Utils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -55,7 +54,22 @@ public class CardDaoImpl implements CardDao {
         return card;
     }
 
+    @Override
+    public void deleteCard(Card card) {
 
+    }
+
+    @Override
+    public boolean blockCard(Card card) {
+        return false;
+    }
+
+    @Override
+    public boolean unBlockCard(Card card) {
+        return false;
+    }
+
+    @Override
     public List<Card> findAllUsersCards(int userid) {
         List<Card> cards = new ArrayList<>();
         ResultSet rs = null;
@@ -65,7 +79,7 @@ public class CardDaoImpl implements CardDao {
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 cards.add(new Card(rs.getInt(1), rs.getInt(2),
-                        rs.getLong(3),rs.getLong(4), CardStatus.valueOf(rs.getString(5))));
+                        rs.getLong(3), rs.getLong(4), CardStatus.valueOf(rs.getString(5))));
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());
