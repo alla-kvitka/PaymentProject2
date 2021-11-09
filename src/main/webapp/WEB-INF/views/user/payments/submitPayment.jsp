@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Home Page</title>
+    <title>Submit payment</title>
     <link rel="stylesheet" href="index.styl">
 </head>
 <body>
@@ -20,15 +20,6 @@
             </ul>
         </nav>
     </header>
-
-    <h1>
-        <p><img src="avatar.jpg" width="250" height="250" align="middle">
-        <li>login: <%= request.getAttribute("login")%>
-        </li>
-        <li> email: <%= request.getAttribute("email")%>
-        </li>
-        </p>
-    </h1>
 
 
     <footer>

@@ -21,6 +21,11 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
+    public Card searchCardById(int cardId) {
+        return cardDao.searchCardById(cardId);
+    }
+
+    @Override
     public void deleteCard(Card card) {
         cardDao.deleteCard(card);
     }

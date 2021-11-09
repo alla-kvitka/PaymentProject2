@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "user-cards", value = "/user-cards")
 public class UserCardsController extends HttpServlet {
@@ -30,12 +31,12 @@ public class UserCardsController extends HttpServlet {
         CardServiceImpl cardService = new CardServiceImpl();
         User user = userService.getUserInfo(login);
         Card card = cardService.allUserCards(user.getUserId());
-//        List<Card> cards = cardDao.findAllUsersCards(user.getUserId());
-//        req.setAttribute("cards", cards);
+        List<Card> cards = cardService.findAllUsersCards(user.getUserId());
+        req.setAttribute("cards", cards);
         req.setAttribute("cardId", String.valueOf(card.getCardId()));
         req.setAttribute("cardSum", card.getCardSum());
         req.setAttribute("cardStatus", card.isCardStatus());
-        getServletContext().getRequestDispatcher("/WEB-INF/views/card/cardInformation.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/user/card/cardInformation.jsp").forward(req, resp);
     }
 
     @Override

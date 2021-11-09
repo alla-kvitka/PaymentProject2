@@ -10,6 +10,8 @@ public interface CardService {
 
     Card allUserCards(int user_id);
 
+    Card searchCardById (int cardId);
+
     void deleteCard(Card card);
 
     boolean blockCard(Card card);

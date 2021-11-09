@@ -1,5 +1,10 @@
 package com.example.paymentproject.conroller.user;
 
+import com.example.paymentproject.entity.Card;
+import com.example.paymentproject.entity.Enums.TransactionType;
+import com.example.paymentproject.entity.Payment;
+import com.example.paymentproject.service.impl.CardServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,14 +14,28 @@ import java.io.IOException;
 
 @WebServlet(name = "payment", value = "/payment")
 public class PaymentController extends HttpServlet {
+    CardServiceImpl cardService = new CardServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/user/payments/doPayment.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        int cardId = Integer.parseInt(req.getParameter("userCardId"));
+        int paymentSum = Integer.parseInt(req.getParameter("sum"));
+        TransactionType trType = TransactionType.valueOf(req.getParameter("trType"));
+        Card card = cardService.searchCardById(cardId);
+        if (trType.equals(TransactionType.NEGATIVE)) {
+            if (card.getCardSum() <= paymentSum) {
+                req.getRequestDispatcher("/WEB-INF/views/user/payments/doPayment.jsp").forward(req, resp);
+            } else {
+
+
+            }
+
+        }
+
     }
 }
