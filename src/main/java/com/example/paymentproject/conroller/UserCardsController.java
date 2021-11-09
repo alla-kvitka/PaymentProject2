@@ -1,6 +1,8 @@
 package com.example.paymentproject.conroller;
 
 
+import com.example.paymentproject.dao.impl.CardDaoImpl;
+import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.impl.UserServiceImpl;
 
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "user-cards", value = "/user-cards")
 public class UserCardsController extends HttpServlet {
@@ -25,9 +28,15 @@ public class UserCardsController extends HttpServlet {
             }
         }
         UserServiceImpl userService = new UserServiceImpl();
+        CardDaoImpl cardDao= new CardDaoImpl();
         User user = userService.getUserInfo(login);
-
-        req.getRequestDispatcher("/WEB-INF/views/card/cardInformation.jsp").forward(req, resp);
+        Card card = cardDao.searchUserCards(user.getUserId());
+//        List<Card> cards = cardDao.findAllUsersCards(user.getUserId());
+//        req.setAttribute("cards", cards);
+        req.setAttribute("cardId",String.valueOf(card.getCardId()));
+        req.setAttribute("cardSum",card.getCardSum());
+        req.setAttribute("cardStatus",card.isCardStatus());
+        getServletContext().getRequestDispatcher("/WEB-INF/views/card/cardInformation.jsp").forward(req, resp);
     }
 
     @Override

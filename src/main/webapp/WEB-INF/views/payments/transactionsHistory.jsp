@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>Transactions history</title>
+    <link rel="stylesheet" href="index.styl">
+
 </head>
 <body>
 <header role="banner">
