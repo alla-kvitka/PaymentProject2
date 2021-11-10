@@ -14,7 +14,7 @@
                 <dir></dir>
                 <dir><a href="block">Block cards</a></dir>
                 <dir><a href="unblock">Unblock cards</a></dir>
-                <dir><a href="#">All cards </a></dir>
+                <dir><a href="allCards">All cards </a></dir>
                 <dir><a href="logout">LogOut</a></dir>
             </ul>
         </nav>

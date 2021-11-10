@@ -43,4 +43,9 @@ public class CardServiceImpl implements CardService {
     public List<Card> findAllUsersCards(int userid) {
         return cardDao.findAllUsersCards(userid);
     }
+
+    @Override
+    public List<Card> findAllCards() {
+        return cardDao.findAllCards();
+    }
 }

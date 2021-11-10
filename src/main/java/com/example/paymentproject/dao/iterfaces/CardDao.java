@@ -22,4 +22,6 @@ public interface CardDao {
 
     Card searchCardByCardId(int cardId);
 
+    List<Card> findAllCards();
+
 }

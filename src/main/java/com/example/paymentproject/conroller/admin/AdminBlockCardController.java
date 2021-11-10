@@ -1,5 +1,7 @@
 package com.example.paymentproject.conroller.admin;
 
+import com.example.paymentproject.service.impl.CardServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import java.io.IOException;
 @WebServlet(name = "block", value = "/block")
 public class AdminBlockCardController extends HttpServlet {
 
+    CardServiceImpl cardService = new CardServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/views/admin/adminBlockCard.jsp").forward(req, resp);
@@ -17,6 +20,7 @@ public class AdminBlockCardController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       doGet(req, resp);
+      int cardId = Integer.parseInt(req.getParameter("cardBlock"));
+      cardService.blockCard(cardId);
     }
 }

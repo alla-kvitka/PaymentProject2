@@ -20,4 +20,5 @@ public interface CardService {
 
     public List<Card> findAllUsersCards(int userid);
 
+    List<Card> findAllCards();
 }

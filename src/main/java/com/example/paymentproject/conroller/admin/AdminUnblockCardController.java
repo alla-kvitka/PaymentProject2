@@ -1,6 +1,8 @@
 package com.example.paymentproject.conroller.admin;
 
 
+import com.example.paymentproject.service.impl.CardServiceImpl;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import java.io.IOException;
 
 @WebServlet(name = "unblock", value = "/unblock")
 public class AdminUnblockCardController extends HttpServlet {
+    CardServiceImpl cardService = new CardServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -18,6 +21,7 @@ public class AdminUnblockCardController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       doGet(req, resp);
+        int cardId = Integer.parseInt(req.getParameter("cardUnblock"));
+        cardService.unBlockCard(cardId);
     }
 }

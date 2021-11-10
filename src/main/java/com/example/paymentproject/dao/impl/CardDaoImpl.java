@@ -134,6 +134,25 @@ public class CardDaoImpl implements CardDao {
         return cards;
     }
 
+@Override
+    public List<Card> findAllCards() {
+        List<Card> cards = new ArrayList<>();
+        ResultSet rs = null;
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM cards")) {
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                cards.add(new Card(rs.getInt(1), rs.getInt(2),
+                        rs.getLong(3), rs.getLong(4), CardStatus.valueOf(rs.getString(5))));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode());
+        } finally {
+            close(rs);
+        }
+        return cards;
+    }
+
 
     private static void close(ResultSet rs) {
         if (rs != null) {
