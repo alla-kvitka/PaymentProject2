@@ -82,15 +82,14 @@ public class PaymentDaoImpl implements PaymentDao {
         List<Payment> createdPayments = new ArrayList<>();
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstmt = connection.prepareStatement
-                     ("SELECT payment_sum,payment_id,card_id,bill_id,payment_type," +
-                             "payment_status PAYMENTS " +
-                             "WHERE user_id =? AND payment_status=0")) {
+             PreparedStatement pstmt =
+                     connection.prepareStatement("SELECT * FROM PAYMENTS WHERE `user_id` = ? AND payment_status=0")) {
+            pstmt.setLong(1,userId);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                createdPayments.add(new Payment(rs.getInt(1), rs.getInt(2),
-                        rs.getInt(3), rs.getLong(4), rs.getString(5),
-                        rs.getInt(6)));
+                createdPayments.add(new Payment(rs.getInt(1),rs.getInt(2),rs.getLong(3),
+                        rs.getInt(4),rs.getInt(5),rs.getString(6),
+                        rs.getInt(7)));
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());

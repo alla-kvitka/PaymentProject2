@@ -10,7 +10,7 @@ public interface CardDao {
     Card insertCard(Card card) throws SQLException;
 
 
-    Card searchCardById (int cardId);
+    Card searchCardById(int cardId);
 
     void deleteCard(Card card);
 
@@ -19,5 +19,7 @@ public interface CardDao {
     void unBlockCard(int cardId);
 
     public List<Card> findAllUsersCards(int userid);
+
+    Card searchCardByCardId(int cardId);
 
 }

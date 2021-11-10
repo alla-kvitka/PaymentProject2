@@ -1,4 +1,4 @@
-<%--<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -22,42 +22,36 @@
         </nav>
     </header>
 
-<%--        <table>--%>
-<%--            <tr>--%>
-<%--                <th>ID</th>--%>
-<%--                <th>Sum</th>--%>
-<%--                <th>Status</th>--%>
-<%--            </tr>--%>
-<%--            <p></p>--%>
-<%--            <c:forEach items="${requestScope.cards}" var="card">--%>
-<%--                <tr>--%>
-<%--                    <td>--%>
-<%--                        <c:out value="${card.cardId}"/>--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        <c:out value="${card.cardSum}"/>--%>
-<%--                    </td>--%>
-<%--                    <td>--%>
-<%--                        <c:out value="${card.isCardStatus()}"/>--%>
-<%--                    </td>--%>
-<%--                </tr>--%>
-<%--            </c:forEach>--%>
-<%--        </table>--%>
 
-    <h1 align="center">Your Cards</h1>
-    <h2>
-        <li> cardId: <%= request.getAttribute("cardId")%>
-        </li>
-        <li> Sum:<%= request.getAttribute("cardSum")%>
-        </li>
-        <li>card Status <%=request.getAttribute("cardStatus")%>
-        </li>
-    </h2>
+    <table width = "100%" border = "2">
+        <h1 align="center">Your Cards</h1>
+        <tr>
+            <th align="center"><h1>ID</h1></th>
+            <th align="center"><h1>Sum</h1></th>
+            <th align="center"><h1>Status</h1></th>
+        </tr>
+        <p></p>
+        <c:forEach items="${requestScope.cards}" var="card">
+            <tr>
+                <td><h2>
+                    <c:out value="${card.cardId}"/>
+                </h2>
+                </td>
+                <td><h2>
+                    <c:out value="${card.cardSum}"/>
+                </h2>
+                </td>
+                <td><h2>
+                    <c:out value="${card.isCardStatus()}"/>
+                </h2>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 
     <footer>
         <p class="copy" align="left">&copy; Alla Kvitka 2021</p>
     </footer>
-
 </div>
 </body>
 </html>

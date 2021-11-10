@@ -33,7 +33,32 @@ public class CardDaoImpl implements CardDao {
 
 
     @Override
-    public Card searchCardById(int cardId) {
+    public Card searchCardById(int userId) {
+        Card card = null;
+        ResultSet result = null;
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM CARDS WHERE user_id=?")) {
+            pstm.setInt(1, userId);
+            result = pstm.executeQuery();
+            if (result.next()) {
+                card = new Card();
+                card.setBillId(result.getLong("bill_id"));
+                card.setCardId(result.getInt("card_id"));
+                card.setUserId(result.getInt("user_id"));
+                card.setCardSum(result.getLong("card_sum"));
+                card.setCardStatus(CardStatus.valueOf(result.getString("card_status")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode());
+        } finally {
+            close(result);
+        }
+        return card;
+    }
+
+
+    @Override
+    public Card searchCardByCardId(int cardId) {
         Card card = null;
         ResultSet result = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
@@ -55,6 +80,8 @@ public class CardDaoImpl implements CardDao {
         }
         return card;
     }
+
+
 
     @Override
     public void deleteCard(Card card) {
