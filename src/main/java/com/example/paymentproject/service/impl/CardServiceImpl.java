@@ -2,6 +2,7 @@ package com.example.paymentproject.service.impl;
 
 import com.example.paymentproject.dao.impl.CardDaoImpl;
 import com.example.paymentproject.entity.Card;
+import com.example.paymentproject.entity.Payment;
 import com.example.paymentproject.service.interfaces.CardService;
 
 import java.sql.SQLException;
@@ -47,5 +48,9 @@ public class CardServiceImpl implements CardService {
     @Override
     public List<Card> findAllCards() {
         return cardDao.findAllCards();
+    }
+    @Override
+    public void updateBalAfterSubmit(Payment payment) {
+        cardDao.updateBalAfterSubmit(payment);
     }
 }

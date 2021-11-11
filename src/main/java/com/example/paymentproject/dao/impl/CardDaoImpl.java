@@ -3,6 +3,7 @@ package com.example.paymentproject.dao.impl;
 import com.example.paymentproject.dao.iterfaces.CardDao;
 import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.Enums.CardStatus;
+import com.example.paymentproject.entity.Payment;
 import com.example.paymentproject.utils.Utils;
 
 import java.sql.*;
@@ -152,7 +153,22 @@ public class CardDaoImpl implements CardDao {
         }
         return cards;
     }
+@Override
+public  void updateBalAfterSubmit (Payment payment){
+    Card card = searchCardByCardId(payment.getCardId());
+    try (Connection connection = DBConnection.getInstance().getConnection();
+         PreparedStatement pstmt = connection.prepareStatement("UPDATE CARDS SET card_sum=? WHERE card_id=?")){
+        pstmt.setLong(2, payment.getCardId());
+        if (payment.getTransactionType().equalsIgnoreCase("positive"))
+        pstmt.setInt(1, (int) (payment.getPaymentSum()+card.getCardSum()));
+        else
+            pstmt.setInt(1, (int) (card.getCardSum()-payment.getPaymentSum()));
+        pstmt.executeUpdate();
 
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+}
 
     private static void close(ResultSet rs) {
         if (rs != null) {

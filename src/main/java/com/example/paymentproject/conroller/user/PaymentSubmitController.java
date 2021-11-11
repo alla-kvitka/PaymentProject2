@@ -40,5 +40,6 @@ public class PaymentSubmitController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         paymentService.submitAllPaymentsForUser(user.getUserId());
+        req.getRequestDispatcher("/WEB-INF/views/user/payments/doPayment.jsp").forward(req, resp);
     }
 }

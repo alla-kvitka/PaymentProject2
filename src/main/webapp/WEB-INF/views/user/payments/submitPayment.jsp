@@ -26,7 +26,7 @@
         <tr>
             <th align="center"><h1>Card ID</h1></th>
             <th align="center"><h1>Payment Sum</h1></th>
-            <th align="center"><h1>Payment status</h1></th>
+            <th align="center"><h1>Payment type</h1></th>
         </tr>
         <p></p>
         <c:forEach items="${requestScope.payments}" var="payment">

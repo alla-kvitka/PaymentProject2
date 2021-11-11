@@ -35,10 +35,13 @@ public class PaymentDaoImpl implements PaymentDao {
 
     @Override
     public void submitAllPaymentsForUser(int userId) {
+        CardDaoImpl cardDao = new CardDaoImpl();
         List<Payment> createdPayments = searchAllCreatedPayments(userId);
         for (Payment payment : createdPayments) {
             submitPayment(payment);
+            cardDao.updateBalAfterSubmit(payment);
             addToHistory(payment);
+
         }
     }
 
@@ -49,7 +52,7 @@ public class PaymentDaoImpl implements PaymentDao {
         Transaction transaction = Transaction.createTransaction(payment);
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
-                     ("INSERT INTO TRANSACTION_HISTORY VALUES (?, ?, ?, ?,?,?,?,?)")) {
+                     ("INSERT INTO TRANSACTION_HISTORY VALUES (?,?, ?, ?, ?,?,?,?,?)")) {
             transaction.setTrId(random);
             transaction.setDate(String.valueOf(timestamp));
             pstmt.setInt(1, transaction.getUserId());
@@ -58,8 +61,9 @@ public class PaymentDaoImpl implements PaymentDao {
             pstmt.setInt(4, transaction.getCardId());
             pstmt.setTimestamp(5, timestamp);
             pstmt.setInt(6, transaction.getPaymentSum());
-            pstmt.setInt(7, transaction.getStatus());
-            pstmt.setLong(8, transaction.getPaymentId());
+            pstmt.setString(7,transaction.getTransactionType());
+            pstmt.setInt(8, transaction.getStatus());
+            pstmt.setLong(9, transaction.getPaymentId());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -99,6 +103,7 @@ public class PaymentDaoImpl implements PaymentDao {
         return createdPayments;
     }
 
+
     private static void close(ResultSet rs) {
         if (rs != null) {
             try {
@@ -107,7 +112,6 @@ public class PaymentDaoImpl implements PaymentDao {
                 System.out.println(e.getErrorCode());
             }
         }
-
     }
 }
 

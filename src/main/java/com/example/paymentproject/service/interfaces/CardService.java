@@ -1,6 +1,7 @@
 package com.example.paymentproject.service.interfaces;
 
 import com.example.paymentproject.entity.Card;
+import com.example.paymentproject.entity.Payment;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -21,4 +22,6 @@ public interface CardService {
     public List<Card> findAllUsersCards(int userid);
 
     List<Card> findAllCards();
+
+    void updateBalAfterSubmit (Payment payment);
 }

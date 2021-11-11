@@ -23,5 +23,8 @@ public class AdminUnblockCardController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int cardId = Integer.parseInt(req.getParameter("cardUnblock"));
         cardService.unBlockCard(cardId);
+
+        req.getRequestDispatcher("/WEB-INF/views/admin/adminBlockCard.jsp").forward(req, resp);
+
     }
 }
