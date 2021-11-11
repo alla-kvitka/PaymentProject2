@@ -21,7 +21,7 @@ public class Transaction {
 
     public Transaction(int trId, int userId, int paymentSum,
                        int paymentId, int cardId,
-                       long billId, String transactionType, int status) {
+                       long billId, String transactionType, String date, int status) {
         this.trId = trId;
         this.userId = userId;
         this.paymentSum = paymentSum;
@@ -30,6 +30,7 @@ public class Transaction {
         this.billId = billId;
         this.transactionType = transactionType;
         this.status = status;
+        this.date=date;
     }
 
     public Transaction() {

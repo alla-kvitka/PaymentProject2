@@ -68,6 +68,27 @@ public class PaymentDaoImpl implements PaymentDao {
             e.printStackTrace();
         }
     }
+@Override
+    public List<Transaction> searchAllUserTransaction(int userId){
+        List <Transaction> transactionList = new ArrayList<>();
+        ResultSet rs = null;
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt =
+                     connection.prepareStatement("SELECT * FROM TRANSACTION_HISTORY WHERE `user_id` = ?")) {
+            pstmt.setLong(1,userId);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                transactionList.add(new Transaction(rs.getInt(1), rs.getInt(2),rs.getInt(3),
+                        rs.getInt(4),rs.getInt(5),rs.getLong(6),
+                        rs.getString(7),rs.getString(8),rs.getInt(9)));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getErrorCode());
+        } finally {
+            close(rs);
+        }
+        return transactionList;
+    }
 
     @Override
     public void submitPayment(Payment payment) {

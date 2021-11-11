@@ -20,7 +20,7 @@ public class AdminBlockCardController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-      int cardId = Integer.parseInt(req.getParameter("cardUnBlock"));
+      int cardId = Integer.parseInt(req.getParameter("cardBlock"));
       cardService.blockCard(cardId);
       req.getRequestDispatcher("/WEB-INF/views/admin/adminBlockCard.jsp").forward(req, resp);
     }
