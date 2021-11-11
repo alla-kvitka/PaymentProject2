@@ -34,21 +34,7 @@ public class Transaction {
     }
 
     public Transaction() {
-
     }
-
-    public static Transaction createTransaction(Payment payment) {
-        Transaction transaction = new Transaction();
-        transaction.setUserId(payment.getUserId());
-        transaction.setPaymentSum(payment.getPaymentSum());
-        transaction.setPaymentId(payment.getPaymentId());
-        transaction.setCardId(payment.getCardId());
-        transaction.setBillId(payment.getBillId());
-        transaction.setTransactionType(payment.getTransactionType());
-        transaction.setStatus(payment.getStatus());
-        return transaction;
-    }
-
 
     public int getTrId() {
         return trId;

@@ -49,38 +49,41 @@ public class PaymentDaoImpl implements PaymentDao {
     public void addToHistory(Payment payment) {
         Timestamp timestamp = new Timestamp(new Date().getTime());
         int random = Utils.randomInt();
-        Transaction transaction = Transaction.createTransaction(payment);
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
                      ("INSERT INTO TRANSACTION_HISTORY VALUES (?,?, ?, ?, ?,?,?,?,?)")) {
-            transaction.setTrId(random);
-            transaction.setDate(String.valueOf(timestamp));
-            pstmt.setInt(1, transaction.getUserId());
-            pstmt.setInt(2, transaction.getTrId());
-            pstmt.setLong(3, transaction.getBillId());
-            pstmt.setInt(4, transaction.getCardId());
+            pstmt.setInt(1, payment.getUserId());
+            pstmt.setInt(2, random);
+            pstmt.setLong(3, payment.getBillId());
+            pstmt.setInt(4, payment.getCardId());
             pstmt.setTimestamp(5, timestamp);
-            pstmt.setInt(6, transaction.getPaymentSum());
-            pstmt.setString(7,transaction.getTransactionType());
-            pstmt.setInt(8, transaction.getStatus());
-            pstmt.setLong(9, transaction.getPaymentId());
+            pstmt.setInt(6, payment.getPaymentSum());
+            pstmt.setString(7, payment.getTransactionType());
+            pstmt.setInt(8, 1);
+            pstmt.setLong(9, payment.getPaymentId());
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-@Override
-    public List<Transaction> searchAllUserTransaction(int userId){
-        List <Transaction> transactionList = new ArrayList<>();
+
+    @Override
+    public List<Transaction> searchAllUserTransaction(int userId) {
+        List<Transaction> transactionList = new ArrayList<>();
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt =
-                     connection.prepareStatement("SELECT * FROM TRANSACTION_HISTORY WHERE `user_id` = ?")) {
-            pstmt.setLong(1,userId);
+                     connection.prepareStatement("SELECT tr_date, card_id, payment_sum, payment_type " +
+                             " FROM TRANSACTION_HISTORY WHERE `user_id` = ?")) {
+            pstmt.setLong(1, userId);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                transactionList.add(new Transaction(rs.getInt(1), rs.getInt(2),rs.getInt(3),
-                        rs.getInt(4),rs.getInt(5),rs.getLong(6),
-                        rs.getString(7),rs.getString(8),rs.getInt(9)));
+                Transaction transaction = new Transaction();
+                transaction.setDate(rs.getString(1));
+                transaction.setCardId(rs.getInt(2));
+                transaction.setPaymentSum(rs.getInt(3));
+                transaction.setTransactionType(rs.getString(4));
+                transactionList.add(transaction);
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());
@@ -109,11 +112,11 @@ public class PaymentDaoImpl implements PaymentDao {
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt =
                      connection.prepareStatement("SELECT * FROM PAYMENTS WHERE `user_id` = ? AND payment_status=0")) {
-            pstmt.setLong(1,userId);
+            pstmt.setLong(1, userId);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                createdPayments.add(new Payment(rs.getInt(1),rs.getInt(2),rs.getLong(3),
-                        rs.getInt(4),rs.getInt(5),rs.getString(6),
+                createdPayments.add(new Payment(rs.getInt(1), rs.getInt(2), rs.getLong(3),
+                        rs.getInt(4), rs.getInt(5), rs.getString(6),
                         rs.getInt(7)));
             }
         } catch (SQLException e) {
