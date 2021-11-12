@@ -30,7 +30,7 @@ public class PaymentSubmitController extends HttpServlet {
                 login = cookie.getValue();
             }
         }
-         user = userService.getUserInfo(login);
+        user = userService.getUserInfo(login);
         paymentList = paymentService.searchAllCreatedPayments(user.getUserId());
         req.setAttribute("payments", paymentList);
         getServletContext().getRequestDispatcher("/WEB-INF/views/user/payments/submitPayment.jsp")

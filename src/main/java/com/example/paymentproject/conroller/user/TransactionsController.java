@@ -1,9 +1,7 @@
 package com.example.paymentproject.conroller.user;
 
-import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.Transaction;
 import com.example.paymentproject.entity.User;
-import com.example.paymentproject.service.impl.CardServiceImpl;
 import com.example.paymentproject.service.impl.PaymentServiceImpl;
 import com.example.paymentproject.service.impl.UserServiceImpl;
 
@@ -32,14 +30,14 @@ public class TransactionsController extends HttpServlet {
         UserServiceImpl userService = new UserServiceImpl();
         User user = userService.getUserInfo(login);
         List<Transaction> transactionList = paymentService.searchAllUserTransaction(user.getUserId());
-        req.setAttribute("transaction",transactionList);
+        req.setAttribute("transaction", transactionList);
         getServletContext().getRequestDispatcher("/WEB-INF/views/user/payments/transactionsHistory.jsp")
                 .forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       doGet(req, resp);
+        doGet(req, resp);
     }
 
 }
