@@ -211,7 +211,6 @@
         </c:forEach>
         <tbody>
     </table>
-
     <footerindex>
         <p class="copy" align="left">&copy; Alla Kvitka 2021</p>
     </footerindex>
