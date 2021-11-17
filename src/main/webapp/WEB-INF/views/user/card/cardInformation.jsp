@@ -5,11 +5,7 @@
 <head>
     <title>Card Information</title>
     <link rel="stylesheet" href="index.styl">
-    <script src="WEB-INF/js/jquery.tablesorter.combined.min.js" type="text/javascript"></script>
-    <script src="WEB-INF/js/jquery.tablesorter.min.js" type="text/javascript"></script>
-    $(document).ready(function() {
-    $("#tabela").tableSorter();
-    });
+
 </head>
 <body>
 <div class="line"></div>

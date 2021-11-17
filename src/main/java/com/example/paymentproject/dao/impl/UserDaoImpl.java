@@ -24,7 +24,6 @@ public class UserDaoImpl implements UserDao {
             if (checkExistForUser(user)) {
                 user.setUserId(userIdRandom);
                 user.setUserBill(randomBill);
-
                 pstmt.setLong(1, user.getUserId());
                 pstmt.setString(2, user.getUserLogin());
                 pstmt.setString(3, user.getUserPassword());

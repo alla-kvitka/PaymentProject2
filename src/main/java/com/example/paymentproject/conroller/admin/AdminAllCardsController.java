@@ -22,8 +22,6 @@ public class AdminAllCardsController extends HttpServlet {
         req.setAttribute("allCards",allCards);
         getServletContext().getRequestDispatcher("/WEB-INF/views/admin/adminAllCardsWithStatus.jsp")
                 .forward(req, resp);
-
-
     }
 
     @Override
