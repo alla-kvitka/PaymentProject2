@@ -1,9 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
+
 <html>
 <head>
     <title>Card Information</title>
     <link rel="stylesheet" href="index.styl">
+    <script src="WEB-INF/js/jquery.tablesorter.combined.min.js" type="text/javascript"></script>
+    <script src="WEB-INF/js/jquery.tablesorter.min.js" type="text/javascript"></script>
+    $(document).ready(function() {
+    $("#tabela").tableSorter();
+    });
 </head>
 <body>
 <div class="line"></div>
@@ -23,7 +29,7 @@
     </header>
 
 
-    <table width = "100%" border = "2">
+    <table  id="user_list" width = "100%" border = "2">
         <h1 align="center">Your Cards</h1>
         <tr>
             <th align="center"><h1>ID</h1></th>
