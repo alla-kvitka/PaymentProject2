@@ -33,6 +33,8 @@
         <td>Card ID</td>
         <td>Sum</td>
         <td>Status</td>
+        <td>Block card</td>
+        <td> Request to admin</td>
     </tr>
     </thead>
     <tbody>
@@ -49,11 +51,20 @@
             </td>
             <td>
                 <c:out value="${card.isCardStatus()}"/>
-                <form action="${pageContext.request.contextPath}/user-cards" method="post">
-                    <input type="submit" name="button1" value="Button 1" />
-                    <input type="submit" name="button2" value="Button 2" />
+            </td>
+            <td>
+                <form  action="${pageContext.request.contextPath}/user-cards" method="post">
+                    <input type="hidden" name="hidden" value="${card.cardId}">
+                    <input onclick="setTimeout(function () { window.location.reload(); }, 1)" type="submit" name="button1" value="Block card"/>
                 </form>
             </td>
+            <td>
+                <form action="${pageContext.request.contextPath}/user-cards" method="post">
+                    <input type="hidden" name="hidden" value="${card.cardId}">
+                <input onclick="setTimeout(function () { window.location.reload(); }, 1)" type="submit" name="button2" value="Request to unblock"/>
+                </form>
+            </td>>
+
         </tr>
     </c:forEach>
     </tbody>

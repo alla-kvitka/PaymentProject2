@@ -18,6 +18,7 @@ import java.util.List;
 @WebServlet(name = "user-cards", value = "/user-cards")
 public class UserCardsController extends HttpServlet {
 
+    CardServiceImpl cardService = new CardServiceImpl();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cookie[] cookies = req.getCookies();
@@ -38,6 +39,15 @@ public class UserCardsController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-       doGet(req, resp);
+        int cardId = Integer.parseInt(req.getParameter("hidden"));
+
+        if (req.getParameter("button1")!=null)
+        {
+            cardService.blockCard(cardId);
+        }
+        else if (req.getParameter("button2") != null) {
+            cardService.unBlockCard(cardId);
+        }
+        req.getRequestDispatcher("/WEB-INF/views/user/card/cardInformation.jsp").forward(req, resp);
     }
 }
