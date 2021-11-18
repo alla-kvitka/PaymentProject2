@@ -20,15 +20,24 @@
             </ul>
         </nav>
     </header>
-    <h2>
-        <p><img src="avatar.jpg" width="250" height="250" align="middle">
-        <li>login: <%= request.getAttribute("login")%>
-        </li>
-        <li> email: <%= request.getAttribute("email")%>
-        </li>
-        </p>
-    </h2>
+    <block1>
+            <img src="avatar.jpg" width="250" height="250" align="middle">
+    </block1>
 
+    <block2>
+        <h2 align="center"> Hello,here you can create new card</h2>
+        <form align="center" method=post>
+            <div class="row">
+                <input placeholder='Login' name='login' type='text'/>
+            </div>
+            <div class="row">
+                <input placeholder='Password'  name='password' type='password'/>
+            </div>
+            <div class="row">
+                <input type='submit' name='submit'/>
+            </div>
+        </form>
+    </block2>
 </div>
 </body>
 </html>

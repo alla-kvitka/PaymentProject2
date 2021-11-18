@@ -3,11 +3,11 @@ package com.example.paymentproject.dao.impl;
 import com.example.paymentproject.dao.iterfaces.CardDao;
 import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.Enums.CardStatus;
+import com.example.paymentproject.entity.Enums.UserRequest;
 import com.example.paymentproject.entity.Enums.UserStatus;
 import com.example.paymentproject.entity.Payment;
 import com.example.paymentproject.utils.Utils;
 
-import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +18,7 @@ public class CardDaoImpl implements CardDao {
         int random = Utils.randomInt();
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
-                     ("INSERT INTO CARDS VALUES (?, ?, ?, ?,?,?)",
+                     ("INSERT INTO CARDS VALUES (?, ?, ?, ?,?,?,?)",
                              Statement.RETURN_GENERATED_KEYS)) {
             card.setCardId(random);
             pstmt.setInt(1, card.getCardId());
@@ -27,13 +27,15 @@ public class CardDaoImpl implements CardDao {
             pstmt.setLong(4, card.getBillId());
             pstmt.setString(5, String.valueOf(card.isCardStatus()));
             pstmt.setString(6, String.valueOf(card.getUserStatus()));
+            pstmt.setString(7,String.valueOf(card.getUserRequest()));
             pstmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return card;
     }
+
+
 
 
     @Override
@@ -130,7 +132,7 @@ public class CardDaoImpl implements CardDao {
             while (rs.next()) {
                 cards.add(new Card(rs.getInt(1), rs.getInt(2),
                         rs.getLong(3), rs.getLong(4), CardStatus.valueOf(rs.getString(5)),
-                        UserStatus.valueOf(rs.getString(6))));
+                        UserStatus.valueOf(rs.getString(6)), UserRequest.valueOf(rs.getString(7))));
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());
@@ -150,7 +152,7 @@ public class CardDaoImpl implements CardDao {
             while (rs.next()) {
                 cards.add(new Card(rs.getInt(1), rs.getInt(2),
                         rs.getLong(3), rs.getLong(4), CardStatus.valueOf(rs.getString(5)),
-                        UserStatus.valueOf(rs.getString(6))));
+                        UserStatus.valueOf(rs.getString(6)), UserRequest.valueOf(rs.getString(7))));
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());

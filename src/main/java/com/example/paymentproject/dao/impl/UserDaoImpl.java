@@ -140,6 +140,7 @@ public class UserDaoImpl implements UserDao {
                 user.setUserPassword(rs.getString("user_password"));
                 user.setUserLogin(rs.getString("user_login"));
                 user.setUserEmail(rs.getString("user_email"));
+                user.setUserBill(rs.getLong("user_bill"));
                 user.setRole(Role.valueOf(rs.getString("user_role")));
                 user.setUserStatus(UserStatus.valueOf(rs.getString("user_status")));
             }

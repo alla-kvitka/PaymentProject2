@@ -1,7 +1,6 @@
 package com.example.paymentproject.conroller.admin;
 
 import com.example.paymentproject.service.impl.CardServiceImpl;
-import com.example.paymentproject.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

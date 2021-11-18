@@ -21,7 +21,7 @@
             </ul>
         </nav>
     </header>
-
+<div>
     <h2>
         <p><img src="avatar.jpg" width="250" height="250" align="middle">
         <li>login: <%= request.getAttribute("login")%>
@@ -30,6 +30,7 @@
         </li>
         </p>
     </h2>
+</div>
 </div>
 </body>
 </html>

@@ -14,7 +14,6 @@ import java.sql.SQLException;
 public class LoginController extends HttpServlet {
 
 
-
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         request.getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
     }
@@ -30,7 +29,6 @@ public class LoginController extends HttpServlet {
                 if (oldSession != null) {
                     oldSession.invalidate();
                 }
-
                 HttpSession newSession = req.getSession(true);
                 newSession.setMaxInactiveInterval(5 * 60);
                 User user = userService.getUserInfo(login);
@@ -38,10 +36,11 @@ public class LoginController extends HttpServlet {
                 resp.addCookie(message);
 
                 if (user.getRole().equals(Role.USER)) {
-                resp.sendRedirect(req.getContextPath() + "/homepage");}
-                else
-                    resp.sendRedirect(req.getContextPath() +"/adminHomepage");
+                    resp.sendRedirect(req.getContextPath() + "/homepage");
+                } else
+                    resp.sendRedirect(req.getContextPath() + "/adminHomepage");
             }
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

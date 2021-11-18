@@ -2,7 +2,7 @@ drop table users;
 
 CREATE TABLE users
 (
-    user_id       bigint       NOT NULL,
+    user_id       bigint       NOT NULL UNIQUE,
     user_login    varchar(32)  NOT NULL UNIQUE,
     user_password varchar(32)  NOT NULL,
     user_email    varchar(128) NOT NULL UNIQUE,
@@ -21,24 +21,16 @@ drop table cards;
 
 CREATE TABLE cards
 (
-    card_id     bigint      NOT NULL,
-    user_id     bigint      NOT NULL UNIQUE,
-    card_sum    bigint      NOT NULL,
-    bill_id     bigint      NOT NULL,
-    card_status varchar(26) NOT NULL,
-    user_status varchar(26) NOT NULL,
+    card_id      bigint      NOT NULL UNIQUE,
+    user_id      bigint      NOT NULL,
+    card_sum     bigint      NOT NULL,
+    bill_id      bigint      NOT NULL,
+    card_status  varchar(26) NOT NULL,
+    user_status  varchar(26) NOT NULL,
+    user_request varchar(26) NOT NULL,
     PRIMARY KEY (card_id)
 );
-drop table bill;
-CREATE TABLE bill
-(
-    bill_id     bigint      NOT NULL,
-    bill_sum    bigint      NOT NULL,
-    bill_name   varchar(16) NOT NULL,
-    bill_status boolean     NOT NULL,
 
-    PRIMARY KEY (bill_id)
-);
 
 drop table Transaction_history;
 CREATE TABLE Transaction_history

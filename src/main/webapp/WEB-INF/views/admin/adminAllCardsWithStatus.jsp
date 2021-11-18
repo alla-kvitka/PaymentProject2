@@ -35,6 +35,7 @@
             <td>Card Status</td>
             <td>User ID</td>
             <td>User Status</td>
+            <td>Request</td>
         </tr>
         <p></p>
         <c:forEach items="${requestScope.allCards}" var="card">
@@ -53,6 +54,9 @@
                 </td>
                 <td>
                     <c:out value="${card.userStatus}"/>
+                </td>
+                <td>
+                    <c:out value="${card.userRequest}"/>
                 </td>
             </tr>
         </c:forEach>

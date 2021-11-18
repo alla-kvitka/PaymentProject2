@@ -1,6 +1,7 @@
 package com.example.paymentproject.entity;
 
 import com.example.paymentproject.entity.Enums.CardStatus;
+import com.example.paymentproject.entity.Enums.UserRequest;
 import com.example.paymentproject.entity.Enums.UserStatus;
 
 public class Card {
@@ -10,15 +11,17 @@ public class Card {
     private long billId;
     private CardStatus cardStatus;
     private UserStatus userStatus;
+    private UserRequest userRequest;
 
-    public Card(int cardId, int userId, long cardSum, long billId, CardStatus cardStatus, UserStatus userStatus) {
+    public Card(int cardId, int userId, long cardSum, long billId,
+                CardStatus cardStatus, UserStatus userStatus, UserRequest userRequest) {
         this.cardId = cardId;
         this.userId = userId;
         this.cardSum = cardSum;
         this.billId = billId;
         this.cardStatus = cardStatus;
         this.userStatus = userStatus;
-
+        this.userRequest=userRequest;
     }
 
     public Card() {
@@ -31,7 +34,16 @@ public class Card {
         card.setCardStatus(CardStatus.ACTIVE);
         card.setBillId(user.getUserBill());
         card.setUserStatus(user.getUserStatus());
+        card.setUserRequest(UserRequest.NO_REQUEST);
         return card;
+    }
+
+    public UserRequest getUserRequest() {
+        return userRequest;
+    }
+
+    public void setUserRequest(UserRequest userRequest) {
+        this.userRequest = userRequest;
     }
 
     public UserStatus getUserStatus() {

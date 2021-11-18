@@ -49,6 +49,10 @@
             </td>
             <td>
                 <c:out value="${card.isCardStatus()}"/>
+                <form action="${pageContext.request.contextPath}/user-cards" method="post">
+                    <input type="submit" name="button1" value="Button 1" />
+                    <input type="submit" name="button2" value="Button 2" />
+                </form>
             </td>
         </tr>
     </c:forEach>
