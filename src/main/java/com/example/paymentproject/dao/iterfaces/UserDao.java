@@ -6,6 +6,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserDao {
+
+    void unBlockUser(int userId);
+
+    void blockUser(int userId);
+
     User insertUser(User user);
 
     void deleteUser(User user);

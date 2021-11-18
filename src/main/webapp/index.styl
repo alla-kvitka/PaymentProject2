@@ -8,20 +8,29 @@ body {
   width: 100%;
   height: 100%;
 }
-body {color: #333;}
+
+body {
+  color: #333;
+}
+
 *,
 *:before,
-*:after {box-sizing: border-box;}
+*:after {
+  box-sizing: border-box;
+}
+
 .line {
   float: left;
   width: 100%;
   border-top: .25em solid #333;
 }
+
 .wrapper {
   margin: auto;
   width: 60em;
 
 }
+
 header,
 nav,
 section,
@@ -29,10 +38,12 @@ footer {
   float: left;
   width: 100%;
 }
+
 a {
   text-decoration: none;
   transition: color .25s;
 }
+
 .button {
   display: block;
   padding: .75em 1.25em;
@@ -43,17 +54,31 @@ a {
   color: #fff;
   border: 0;
   cursor: pointer;
+
   &:focus,
-  &:hover {background: darken(#000, 7%);}
-  &:active {background: #000;}
+  &:hover {
+    background: darken(#000, 7%);
+  }
+
+  &:active {
+    background: #000;
+  }
 }
+
 .link {
   font-weight: bold;
   color: #000;
+
   &:focus,
-  &:hover {color: darken(#000, 10%);}
-  &:active {color: lighten(#000, 5%);}
+  &:hover {
+    color: darken(#000, 10%);
+  }
+
+  &:active {
+    color: lighten(#000, 5%);
+  }
 }
+
 /*Navigation*/
 nav h1 {
   float: left;
@@ -61,12 +86,23 @@ nav h1 {
   font-size: 4.5em;
   text-transform: uppercase;
 }
-nav h1 a {color: #000;}
+
+nav h1 a {
+  color: #000;
+}
+
 .nav-ul {
   display: flex;
 }
-header li {width: 20%;}
-header li:not(:first-child) {margin-left: 2%;}
+
+header li {
+  width: 20%;
+}
+
+header li:not(:first-child) {
+  margin-left: 2%;
+}
+
 header .nav-ul a {
   display: block;
   padding: 1.75em .5em;
@@ -74,39 +110,63 @@ header .nav-ul a {
   text-align: center;
   text-transform: uppercase;
   color: #333333;
+
   &:focus,
-  &:hover {color: #000;}
-  &:active {color: lighten(#000, 5%);}
+  &:hover {
+    color: #000;
+  }
+
+  &:active {
+    color: lighten(#000, 5%);
+  }
 }
+
 header li:first-child a {
   background: #000;
   color: #333;
-  &:hover {color: #fff;}
+
+  &:hover {
+    color: #fff;
+  }
 }
+
 /*Sections*/
-section {margin: 1em 0;}
-section h1 {text-transform: uppercase;}
+section {
+  margin: 1em 0;
+}
+
+section h1 {
+  text-transform: uppercase;
+}
+
 hr {
   border-color: #a9a9a9;
   border-style: dashed;
 }
+
 .vertical {
   width: 0;
   height: 10px;
 }
+
 /*Intro*/
-.sec-intro {position: relative;}
+.sec-intro {
+  position: relative;
+}
+
 .sec-intro img {
   width: 100%;
 }
+
 .sec-intro h1 {
   position: absolute;
   bottom: .5em;
   left: .5em;
   padding: .5em;
-  background: rgba(0,0,0,.5);
+  background: rgba(0, 0, 0, .5);
   color: #fff;
 }
+
 /*Boxes*/
 .box {
   float: left;
@@ -117,27 +177,43 @@ hr {
   border-bottom: .1em solid #a9a9a9;
   border-left: .1em solid #a9a9a9;
   @include transition(background);
+
   &:focus,
-  &:hover {background: #f5f5f5;}
+  &:hover {
+    background: #f5f5f5;
+  }
 }
-.box:last-child {border-right: .1em solid #a9a9a9;}
-.box h1 {text-align: center;}
+
+.box:last-child {
+  border-right: .1em solid #a9a9a9;
+}
+
+.box h1 {
+  text-align: center;
+}
+
 .box p {
   margin-top: 4em;
   height: 6em;
   text-align: justify;
 }
+
 .box .button {
   margin: 4em auto;
 }
+
 /*Events*/
-.sec-events > h1 {margin-top: 1em;}
+.sec-events > h1 {
+  margin-top: 1em;
+}
+
 .sec-events article {
   float: left;
   padding: 0 .25em;
   width: 25%;
   text-align: justify;
 }
+
 .sec-events article h1,
 .sec-events article p {
   display: block;
@@ -145,74 +221,137 @@ hr {
   padding: .25em 1em;
   font-size: 110%;
 }
-.sec-events article a {float: right;padding-right: 1em;}
-.sec-events article h1 {font-weight: bold;text-align: center;}
+
+.sec-events article a {
+  float: right;
+  padding-right: 1em;
+}
+
+.sec-events article h1 {
+  font-weight: bold;
+  text-align: center;
+}
+
 /*Projects*/
-.sec-projects {width: 60%;}
+.sec-projects {
+  width: 60%;
+}
+
 .sec-projects > h1 {
   margin-top: 1em;
   text-align: center;
 }
+
 .sec-projects article {
   padding: .5em 0;
   width: 100%;
 }
+
 .sec-projects article h1,
-.sec-projects article p {font-size: 110%;}
-.sec-projects article h1 {font-weight: bold;}
+.sec-projects article p {
+  font-size: 110%;
+}
+
+.sec-projects article h1 {
+  font-weight: bold;
+}
+
 .sec-projects article p {
   margin: .5em .5em .5em 0;
   text-align: justify;
 }
-.sec-projects p a {float: right;}
+
+.sec-projects p a {
+  float: right;
+}
+
 .sec-projects button {
   position: relative;
   left: 80%;
 }
+
 /*Standards*/
-.sec-standards {width: 40%;}
+.sec-standards {
+  width: 40%;
+}
+
 .sec-standards > h1 {
   margin-top: 1em;
   text-align: center;
 }
+
 .sec-standards article {
   float: left;
   padding: .5em 1em;
   width: 50%;
   text-align: justify;
 }
-.sec-standards article:last-child {padding: .5em 0;}
-.sec-standards article h1 {text-align: center;}
+
+.sec-standards article:last-child {
+  padding: .5em 0;
+}
+
+.sec-standards article h1 {
+  text-align: center;
+}
+
 /*Partners*/
-.sec-partners h1 {margin-top: 1em;}
+.sec-partners h1 {
+  margin-top: 1em;
+}
+
 .sec-partners .row {
   float: left;
   margin: 2em 0;
   width: 100%;
 }
+
 .logo-container {
   float: left;
   width: 16%;
   width: 100px;
 }
-.logo-container:not(:first-child) {margin-left: 7.5%;}
-.logo-container:first-child {margin-top: .2em;}
-.logo-container:nth-of-type(2) img {margin-top: 1.2em}
-.logo-container:nth-of-type(3) img {margin-top: 1.8em;}
-.logo-container:nth-of-type(4) img {margin-top: 2.35em;}
-.logo-container:nth-of-type(5) img {margin-top: .35em;}
-.logo-container:last-of-type img {margin-top: .65em;}
+
+.logo-container:not(:first-child) {
+  margin-left: 7.5%;
+}
+
+.logo-container:first-child {
+  margin-top: .2em;
+}
+
+.logo-container:nth-of-type(2) img {
+  margin-top: 1.2em
+}
+
+.logo-container:nth-of-type(3) img {
+  margin-top: 1.8em;
+}
+
+.logo-container:nth-of-type(4) img {
+  margin-top: 2.35em;
+}
+
+.logo-container:nth-of-type(5) img {
+  margin-top: .35em;
+}
+
+.logo-container:last-of-type img {
+  margin-top: .65em;
+}
+
 .sec-partners img {
   float: left;
   width: 100%;
 }
+
 /*Footer*/
 footer {
-  position:fixed;
-  left:0px;
-  bottom:0px;
-  height:30px;
-  width:100%;
+  position: fixed;
+  left: 0px;
+  bottom: 0px;
+  height: 30px;
+  width: 100%;
   padding: 2em 0;
   background: #333;
 }
@@ -222,33 +361,134 @@ footer a {
   font-size: 1.25em;
   font-weight: bold;
   color: #ffffff;
+
   &:focus,
-  &:hover {color: #ffffff;}
+  &:hover {
+    color: #ffffff;
+  }
 }
-
-
 
 footerindex {
   padding: 2em 0;
   width: 100%;
   text-align: left;
-  background:#333333
+  background: #333333
 }
 
 footerindex a {
   font-size: 1.25em;
   font-weight: bold;
   color: #ffffff;
+
   &:focus,
-  &:hover {color: #ffffff;}
+  &:hover {
+    color: #ffffff;
+  }
 }
+
+//таблица полосатая
 table {
-  border-left: 5px solid #000;
-  border-right: 5px solid #000;
+  width: 100%;
+  border: none;
+  margin-bottom: 20px;
 }
-td {
-  border-top: 5px solid #000;
-  border-bottom: 5px solid #000;
+
+table thead tr {
+  font-weight: bold;
+  text-align: left;
+  border: none;
+  padding: 10px 15px;
+  background: #d8d8d8;
+  font-size: 25px;
 }
-.copy {font-size: .85em;}
+
+table thead tr td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+table thead tr td:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+table tbody td {
+  text-align: left;
+  border: none;
+  padding: 10px 15px;
+  font-size: 25px;
+  vertical-align: top;
+}
+
+table tbody tr:nth-child(even) {
+  background: #f3f3f3;
+}
+
+table tbody tr td:first-child {
+  border-radius: 8px 0 0 8px;
+}
+
+table tbody tr td:last-child {
+  border-radius: 0 8px 8px 0;
+}
+
+.copy {
+  font-size: .85em;
+}
+
+
+//регистрация
+
+form {
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input[type=text] {
+  width: 35%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+input[type=password] {
+  width: 35%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+input[type=number] {
+  width: 35%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type=submit] {
+  background-color: #333;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5%
+}
+
+}
+
+input[type=submit]:hover {
+  background-color: #333;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+  margin-top: 10px;
+}
+
+
 

@@ -1,6 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8"  %>
-<html>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${requestScope.lang}"/>
+<fmt:setBundle basename="messages"/>
+
+<html lang="${requestScope.lang}">
 <head>
     <title>All cards</title>
     <link rel="stylesheet" href="index.styl">
@@ -14,43 +18,46 @@
             <h1><a href="adminHomepage">Home</a></h1>
             <ul class="nav-ul">
                 <dir></dir>
-                <dir><a href="block">Block cards</a></dir>
-                <dir><a href="unblock">Unblock cards</a></dir>
-                <dir><a href="allCards">All cards </a></dir>
+                <dir><a href="block">Block Card</a></dir>
+                <dir><a href="unblock">Unblock Card</a></dir>
+                <dir><a href="userBlock">Block User</a></dir>
+                <dir><a href="userUnblock">Unblock User</a></dir>
+                <dir><a href="allCards">All users</a></dir>
                 <dir><a href="logout">LogOut</a></dir>
             </ul>
         </nav>
     </header>
-
-    <table width = "100%" border = "2">
-        <h1 align="center">All Cards</h1>
+    <h2 align="center">All Cards</h2>
+    <table width="100%">
         <tr>
-            <th align="center"><h1>ID</h1></th>
-            <th align="center"><h1>Sum</h1></th>
-            <th align="center"><h1>Card Status</h1></th>
+            <td>Card ID</td>
+            <td>Sum</td>
+            <td>Card Status</td>
+            <td>User ID</td>
+            <td>User Status</td>
         </tr>
         <p></p>
         <c:forEach items="${requestScope.allCards}" var="card">
             <tr>
-                <td><h2>
+                <td>
                     <c:out value="${card.cardId}"/>
-                </h2>
                 </td>
-                <td><h2>
+                <td>
                     <c:out value="${card.cardSum}"/>
-                </h2>
                 </td>
-                <td><h2>
+                <td>
                     <c:out value="${card.isCardStatus()}"/>
-                </h2>
+                </td>
+                <td>
+                    <c:out value="${card.userId}"/>
+                </td>
+                <td>
+                    <c:out value="${card.userStatus}"/>
                 </td>
             </tr>
         </c:forEach>
     </table>
 
-    <footer>
-        <p class="copy" align="left">&copy; Alla Kvitka 2021</p>
-    </footer>
 </div>
 </body>
 </html>

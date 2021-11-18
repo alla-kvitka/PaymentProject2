@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.util.List;
 
 public interface UserService {
+    void unBlockUser(int userId);
+
+    void blockUser(int userId);
 
     User createUser(User user);
 

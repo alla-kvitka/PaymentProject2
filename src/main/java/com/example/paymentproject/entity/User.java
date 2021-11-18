@@ -1,6 +1,7 @@
 package com.example.paymentproject.entity;
 
 import com.example.paymentproject.entity.Enums.Role;
+import com.example.paymentproject.entity.Enums.UserStatus;
 
 public class User {
     private int userId;
@@ -9,7 +10,7 @@ public class User {
     private String userEmail;
     private Role role;
     private long userBill;
-
+    private UserStatus userStatus;
     public User() {
     }
 
@@ -20,6 +21,7 @@ public class User {
         user.setUserPassword(password);
         user.setUserEmail(email);
         user.setRole(Role.USER);
+        user.setUserStatus(UserStatus.ACTIVE);
         return user;
     }
 
@@ -78,6 +80,14 @@ public class User {
 
     public void setUserBill(long userBill) {
         this.userBill = userBill;
+    }
+
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
     }
 
 }

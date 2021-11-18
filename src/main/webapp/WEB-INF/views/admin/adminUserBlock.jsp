@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Admin Home Page</title>
+    <title>Block user</title>
     <link rel="stylesheet" href="index.styl">
 </head>
 <body>
@@ -11,7 +11,6 @@
         <nav role="navigation">
             <h1><a href="adminHomepage">Home</a></h1>
             <ul class="nav-ul">
-                <dir></dir>
                 <dir><a href="block">Block Card</a></dir>
                 <dir><a href="unblock">Unblock Card</a></dir>
                 <dir><a href="userBlock">Block User</a></dir>
@@ -22,14 +21,14 @@
         </nav>
     </header>
 
-    <h2>
-        <p><img src="avatar.jpg" width="250" height="250" align="middle">
-        <li>login: <%= request.getAttribute("login")%>
-        </li>
-        <li> email: <%= request.getAttribute("email")%>
-        </li>
-        </p>
-    </h2>
+        <h1 align="center">ENTER USER TO BLOCK</h1>
+        <form align="center" method=post>
+            <label>
+                <input type='text' name='userBlock'/>
+            </label>
+            <input type='submit' name='submit'/>
+        </form>
+
 </div>
 </body>
 </html>

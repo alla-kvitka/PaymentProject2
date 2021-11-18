@@ -3,7 +3,6 @@
 <head>
     <title>Do Payment</title>
     <link rel="stylesheet" href="index.styl">
-
 </head>
 <body>
 <div class="line"></div>
@@ -21,31 +20,23 @@
             </ul>
         </nav>
     </header>
-
-    <h4 align="center">Your Card*</h4>
+    <h2 align="center">DO PAYMENT</h2>
     <form align="center" method=post>
-        <label>
-            <input type='number' name='userCardId'/>
-        </label>
-        <h4>sum*</h4>
-        <label>
-            <input type='number' name='sum'/>
-        </label>
-        <h4>positive/negative</h4>
-        <label>
-            <input type='text' name='trType'/>
-        </label>
-        </br>
-        </br>
-        <input type='submit' name='submit'/>
+        <div class="row">
+            <input type='number' name='userCardId' placeholder="card number"/>
+        </div>
+        <div class="row">
+            <input type='number' name='sum' placeholder="payment sum"/>
+        </div>
+        <div class="row">
+            <input type='text' name='trType' placeholder="positive/negative"/>
+        </div>
+        <div class="row">
+            <input type='submit' name='submit'/>
+        </div>
     </form>
 
 
-
-
-    <footer>
-        <p class="copy" align="left">&copy; Alla Kvitka 2021</p>
-    </footer>
 </div>
 </body>
 </html>

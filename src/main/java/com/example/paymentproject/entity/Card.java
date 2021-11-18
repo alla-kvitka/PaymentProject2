@@ -1,6 +1,7 @@
 package com.example.paymentproject.entity;
 
 import com.example.paymentproject.entity.Enums.CardStatus;
+import com.example.paymentproject.entity.Enums.UserStatus;
 
 public class Card {
     private int cardId;
@@ -8,13 +9,16 @@ public class Card {
     private long cardSum;
     private long billId;
     private CardStatus cardStatus;
+    private UserStatus userStatus;
 
-    public Card(int cardId, int userId, long cardSum, long billId, CardStatus cardStatus) {
+    public Card(int cardId, int userId, long cardSum, long billId, CardStatus cardStatus, UserStatus userStatus) {
         this.cardId = cardId;
         this.userId = userId;
         this.cardSum = cardSum;
         this.billId = billId;
         this.cardStatus = cardStatus;
+        this.userStatus = userStatus;
+
     }
 
     public Card() {
@@ -26,7 +30,16 @@ public class Card {
         card.setCardSum(4000);
         card.setCardStatus(CardStatus.ACTIVE);
         card.setBillId(user.getUserBill());
+        card.setUserStatus(user.getUserStatus());
         return card;
+    }
+
+    public UserStatus getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(UserStatus userStatus) {
+        this.userStatus = userStatus;
     }
 
     public int getCardId() {

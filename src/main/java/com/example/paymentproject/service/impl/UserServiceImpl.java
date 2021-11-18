@@ -15,6 +15,14 @@ public class UserServiceImpl implements UserService {
         return userDaoImpl.insertUser(user);
     }
 
+    public void blockUser(int userId) {
+        userDaoImpl.blockUser(userId);
+    }
+
+    public void unBlockUser(int userId) {
+        userDaoImpl.unBlockUser(userId);
+    }
+
     @Override
     public void deleteUser(User user) {
         userDaoImpl.deleteUser(user);
@@ -41,6 +49,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(int userID) {
-        return  userDaoImpl.getUserById(userID);
+        return userDaoImpl.getUserById(userID);
     }
 }

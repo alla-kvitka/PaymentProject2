@@ -7,14 +7,13 @@ CREATE TABLE users
     user_password varchar(32)  NOT NULL,
     user_email    varchar(128) NOT NULL UNIQUE,
     user_role     varchar(16)  NOT NULL,
-    user_bill     bigint       NOT NULL NOT NULL,
+    user_bill     bigint       NOT NULL,
+    user_status   varchar(26)  NOT NULL,
     PRIMARY KEY (user_id)
 );
 
 INSERT INTO users
-VALUES (123182241, 'akvitka', '20121997', 'invariant17@gmail.com', 'ADMIN', 12731811248247);
-INSERT INTO users
-VALUES (112311244, 'test', 'test', 'test@gmail.com', 'USER', 128712741827316);
+VALUES (123182241, 'akvitka', '20121997', 'invariant17@gmail.com', 'ADMIN', 12731811248247, 'ACTIVE');
 
 
 
@@ -22,11 +21,12 @@ drop table cards;
 
 CREATE TABLE cards
 (
-    card_id     bigint NOT NULL,
-    user_id     bigint NOT NULL UNIQUE,
-    card_sum    bigint NOT NULL,
-    bill_id     bigint NOT NULL,
-    card_status varchar(26),
+    card_id     bigint      NOT NULL,
+    user_id     bigint      NOT NULL UNIQUE,
+    card_sum    bigint      NOT NULL,
+    bill_id     bigint      NOT NULL,
+    card_status varchar(26) NOT NULL,
+    user_status varchar(26) NOT NULL,
     PRIMARY KEY (card_id)
 );
 drop table bill;

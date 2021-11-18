@@ -4,6 +4,7 @@
 <head>
     <title>Submit payment</title>
     <link rel="stylesheet" href="index.styl">
+
 </head>
 <body>
 <div class="line"></div>
@@ -21,39 +22,37 @@
             </ul>
         </nav>
     </header>
-    <table width = "100%" border = "2">
-        <h1 align="center">Submit your payments</h1>
-        <tr>
-            <th align="center"><h1>Card ID</h1></th>
-            <th align="center"><h1>Payment Sum</h1></th>
-            <th align="center"><h1>Payment type</h1></th>
-        </tr>
-        <p></p>
-        <c:forEach items="${requestScope.payments}" var="payment">
-            <tr>
-                <td><h2>
-                    <c:out value="${payment.cardId}"/>
-                </h2>
-                </td>
-                <td><h2>
-                    <c:out value="${payment.paymentSum}"/>
-                </h2>
-                </td>
-                <td><h2>
-                    <c:out value="${payment.transactionType}"/>
-                </h2>
-                </td>
-            </tr>
-        </c:forEach>
-    </table>
-
-    <form align="center" method = post>
-        <h1>  <input type = 'submit' name='submit'/></h1>
-    </form>
-
-    <footerindex>
-        <p class="copy" align="left">&copy; Alla Kvitka 2021</p>
-    </footerindex>
+    <h2 align="center">SUBMIT YOUR PAYMENTS</h2>
 </div>
+<table  width="80%" align="center">
+    <thead>
+    <tr>
+        <th>Card ID</th>
+        <th>Payment Sum</th>
+        <th>Payment type</th>
+    </tr>
+    <thead>
+    <tbody>
+
+    <c:forEach items="${requestScope.payments}" var="payment">
+        <tr>
+            <td>
+                <c:out value="${payment.cardId}"/>
+            </td>
+            <td>
+                <c:out value="${payment.paymentSum}"/>
+            </td>
+            <td>
+                <c:out value="${payment.transactionType}"/>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+
+<form align="center" method=post>
+    <h1><input type='submit' name='submit'/></h1>
+</form>
+
 </body>
 </html>

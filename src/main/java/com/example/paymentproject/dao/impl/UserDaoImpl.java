@@ -3,6 +3,7 @@ package com.example.paymentproject.dao.impl;
 
 import com.example.paymentproject.dao.iterfaces.UserDao;
 import com.example.paymentproject.entity.Enums.Role;
+import com.example.paymentproject.entity.Enums.UserStatus;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.utils.Utils;
 
@@ -14,12 +15,57 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     @Override
+    public void unBlockUser(int userId) {
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("UPDATE USERD SET user_status=? WHERE user_id=?")) {
+            pstmt.setString(1, "ACTIVE");
+            pstmt.setLong(2, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("UPDATE CARDS SET user_status=? WHERE user_id=?")) {
+            pstmt.setString(1, "ACTIVE");
+            pstmt.setLong(2, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void blockUser(int userId) {
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("UPDATE USERD SET user_status=? WHERE user_id=?")) {
+            pstmt.setString(1, "BLOCKED");
+            pstmt.setLong(2, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("UPDATE CARDS SET user_status=? WHERE user_id=?")) {
+            pstmt.setString(1, "BLOCKED");
+            pstmt.setLong(2, userId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
     public User insertUser(User user) {
         long randomBill = Utils.randomLong();
         int userIdRandom = Utils.randomInt();
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
-                     ("INSERT INTO USERS VALUES (?, ?, ?, ?,?,?)",
+                     ("INSERT INTO USERS VALUES (?, ?, ?, ?,?,?,?)",
                              Statement.RETURN_GENERATED_KEYS)) {
             if (checkExistForUser(user)) {
                 user.setUserId(userIdRandom);
@@ -30,6 +76,7 @@ public class UserDaoImpl implements UserDao {
                 pstmt.setString(4, user.getUserEmail());
                 pstmt.setString(5, user.getRole().toString());
                 pstmt.setLong(6, user.getUserBill());
+                pstmt.setString(7,user.getUserStatus().toString());
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {
@@ -94,6 +141,7 @@ public class UserDaoImpl implements UserDao {
                 user.setUserLogin(rs.getString("user_login"));
                 user.setUserEmail(rs.getString("user_email"));
                 user.setRole(Role.valueOf(rs.getString("user_role")));
+                user.setUserStatus(UserStatus.valueOf(rs.getString("user_status")));
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());
@@ -118,6 +166,8 @@ public class UserDaoImpl implements UserDao {
                 user.setUserLogin(rs.getString("user_login"));
                 user.setUserEmail(rs.getString("user_email"));
                 user.setRole(Role.valueOf(rs.getString("user_role")));
+                user.setUserStatus(UserStatus.valueOf(rs.getString("user_status")));
+
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());

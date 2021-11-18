@@ -6,7 +6,6 @@
 </head>
 
 <body>
-
 <div class="line"></div>
 <div class="wrapper">
     <header role="banner">
@@ -20,34 +19,25 @@
         </nav>
     </header>
 
+    <form align="center" method=post>
+        <div class="row">
+            <input id="login" placeholder="Login" type='text' name='login'/>
+        </div>
 
-<h4 align="center">login*</h4>
-<form align="center" method = post>
-    <label>
-        <input type = 'text' name='login'/>
-    </label>
-    <h4>email*</h4>
-    <label>
-        <input type = 'text' name='email'/>
-    </label>
-    <h4>password*</h4>
-    <label>
-        <input type = 'text' name='password'/>
-    </label>
-    <h4>repeat password*</h4>
-    <label>
-        <input type = 'text' name='password-repeat'/>
-    </label>
+        <div class="row">
+            <input placeholder="Email" type='text' name='email'/>
+        </div>
+        <div class="row">
+            <input placeholder="Password" type='text' name='password'/>
+        </div>
+        <div class="row">
+            <input placeholder="Repeat pass" type='text' name='password-repeat'/>
+        </div>
+        <div class="row">
+            <input type='submit' name='submit'/>
+        </div>
+    </form>
 
-    </br>
-    </br>
-    <input type = 'submit' name='submit'/>
-</form>
-
-
-    <footer>
-        <p class="copy" align="left">&copy; Alla Kvitka 2021</p>
-    </footer>
 </div>
 </body>
 </html>

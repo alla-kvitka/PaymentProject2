@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,25 +18,20 @@
         </nav>
     </header>
 
+    <h2 align="center">ENTER YOUR</h2>
+    <h2 align="center">CREDENTIALS</h2>
+    <form align="center" method=post>
+        <div class="row">
+            <input placeholder='Login' name='login' type='text'/>
+        </div>
+        <div class="row">
+            <input placeholder='Password'  name='password' type='password'/>
+        </div>
+        <div class="row">
+            <input type='submit' name='submit'/>
+        </div>
+    </form>
 
-<form align="center" method = "post">
-    <h4>login</h4>
-    <label>
-        <input type = "text" name="login"/>
-    </label>
-    <h4>password</h4>
-    <label>
-        <input type = "text" name="password"/>
-    </label>
-    </br>
-    </br>
-    <button type="submit">Confirm</button>
-</form>
-
-
-    <footer>
-        <p class="copy" align="left">&copy; Alla Kvitka 2021</p>
-    </footer>
 </div>
 </body>
 </html>
