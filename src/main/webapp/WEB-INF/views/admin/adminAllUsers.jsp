@@ -1,8 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <fmt:setLocale value="${requestScope.lang}"/>
-<fmt:setBundle basename="messages"/>
+<fmt:setBundle basename="message"/>
+
 <html lang="${requestScope.lang}">
 <head>
     <title>All users</title>
