@@ -72,7 +72,7 @@
                     <form action="${pageContext.request.contextPath}/allCards" method="post">
                         <input type="hidden" name="hidden" value="${card.cardId}">
                         <input onclick="setTimeout(function () { window.location.reload(); }, 3)" type="submit"
-                               name="button3" value=<fmt:message key="table.BlockCard"/>/>
+                               name="button3" value=<fmt:message key="table.BlockCard"/>>
                     </form>
                 </td>
                 <td>
