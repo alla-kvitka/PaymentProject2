@@ -19,6 +19,7 @@ public interface CardDao {
 
     void unBlockCard(int cardId);
 
+    void requestToUnblock (int cardId);
     public List<Card> findAllUsersCards(int userid);
 
     Card searchCardByCardId(int cardId);

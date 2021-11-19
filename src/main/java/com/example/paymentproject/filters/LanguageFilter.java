@@ -51,7 +51,6 @@ import java.io.IOException;
 
         @Override
         public void destroy() {
-            // code
         }
 
     }

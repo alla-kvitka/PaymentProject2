@@ -24,6 +24,7 @@
     </header>
     <h2 align="center">YOUR TRANSACTIONS</h2>
 </div>
+
 <table  align="center" width="80%">
     <thead>
     <tr>
@@ -52,6 +53,9 @@
     </c:forEach>
     <tbody>
 </table>
+
+
+
 
 <script>
 initial_sort_id = 0;

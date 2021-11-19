@@ -17,5 +17,6 @@ public interface PaymentDao {
     void submitPayment(Payment payment);
 
     List<Payment> searchAllCreatedPayments(int userId);
+
     List<Transaction> searchAllUserTransaction(int userId);
 }

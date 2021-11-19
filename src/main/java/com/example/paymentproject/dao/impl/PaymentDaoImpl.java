@@ -74,7 +74,7 @@ public class PaymentDaoImpl implements PaymentDao {
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt =
                      connection.prepareStatement("SELECT tr_date, card_id, payment_sum, payment_type " +
-                             " FROM TRANSACTION_HISTORY WHERE `user_id` = ?")) {
+                             " FROM TRANSACTION_HISTORY WHERE `user_id` = ? ORDER BY card_id")) {
             pstmt.setLong(1, userId);
             rs = pstmt.executeQuery();
             while (rs.next()) {
@@ -92,6 +92,7 @@ public class PaymentDaoImpl implements PaymentDao {
         }
         return transactionList;
     }
+
 
     @Override
     public void submitPayment(Payment payment) {

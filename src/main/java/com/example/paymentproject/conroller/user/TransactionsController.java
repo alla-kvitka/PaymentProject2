@@ -5,6 +5,7 @@ import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.impl.PaymentServiceImpl;
 import com.example.paymentproject.service.impl.UserServiceImpl;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -17,8 +18,14 @@ import java.util.List;
 @WebServlet(name = "transactions", value = "/transactions")
 public class TransactionsController extends HttpServlet {
 
+    PaymentServiceImpl paymentService = new PaymentServiceImpl();
+    UserServiceImpl userService = new UserServiceImpl();
+
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //замінити витгування логіна на сесію
         Cookie[] cookies = req.getCookies();
         String login = null;
         for (Cookie cookie : cookies) {
@@ -26,13 +33,11 @@ public class TransactionsController extends HttpServlet {
                 login = cookie.getValue();
             }
         }
-        PaymentServiceImpl paymentService = new PaymentServiceImpl();
-        UserServiceImpl userService = new UserServiceImpl();
         User user = userService.getUserInfo(login);
         List<Transaction> transactionList = paymentService.searchAllUserTransaction(user.getUserId());
         req.setAttribute("transaction", transactionList);
-        getServletContext().getRequestDispatcher("/WEB-INF/views/user/payments/transactionsHistory.jsp")
-                .forward(req, resp);
+        RequestDispatcher view = getServletContext().getRequestDispatcher("/WEB-INF/views/user/payments/transactionsHistory.jsp");
+        view.forward(req, resp);
     }
 
     @Override

@@ -24,4 +24,6 @@ public interface CardService {
     List<Card> findAllCards();
 
     void updateBalAfterSubmit (Payment payment);
+
+    void requestToUnblock (int cardId);
 }

@@ -61,9 +61,9 @@
             <td>
                 <form action="${pageContext.request.contextPath}/user-cards" method="post">
                     <input type="hidden" name="hidden" value="${card.cardId}">
-                <input onclick="setTimeout(function () { window.location.reload(); }, 3)" type="submit" name="button2" value="Request to unblock"/>
+                <input onclick="setTimeout(function () { window.location.reload(); }, 3)" type="submit" name="button2" value=${card.userRequest}>
                 </form>
-            </td>>
+            </td>
 
         </tr>
     </c:forEach>

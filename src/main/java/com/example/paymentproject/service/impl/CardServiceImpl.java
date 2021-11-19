@@ -53,4 +53,9 @@ public class CardServiceImpl implements CardService {
     public void updateBalAfterSubmit(Payment payment) {
         cardDao.updateBalAfterSubmit(payment);
     }
+
+    @Override
+    public void requestToUnblock(int cardId) {
+        cardDao.requestToUnblock(cardId);
+    }
 }

@@ -46,7 +46,7 @@ public class UserCardsController extends HttpServlet {
             cardService.blockCard(cardId);
         }
         else if (req.getParameter("button2") != null) {
-            cardService.unBlockCard(cardId);
+            cardService.requestToUnblock(cardId);
         }
         req.getRequestDispatcher("/WEB-INF/views/user/card/cardInformation.jsp").forward(req, resp);
     }

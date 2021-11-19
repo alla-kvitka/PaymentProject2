@@ -18,7 +18,7 @@ public class AdminUnblockController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/admin/adminUnblockCard.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/views/admin/adminUnblock.jsp").forward(req, resp);
     }
 
     @Override

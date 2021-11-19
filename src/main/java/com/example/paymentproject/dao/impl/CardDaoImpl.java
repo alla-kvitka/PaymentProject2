@@ -27,7 +27,7 @@ public class CardDaoImpl implements CardDao {
             pstmt.setLong(4, card.getBillId());
             pstmt.setString(5, String.valueOf(card.isCardStatus()));
             pstmt.setString(6, String.valueOf(card.getUserStatus()));
-            pstmt.setString(7,String.valueOf(card.getUserRequest()));
+            pstmt.setString(7, String.valueOf(card.getUserRequest()));
             pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -35,7 +35,29 @@ public class CardDaoImpl implements CardDao {
         return card;
     }
 
+    public void requestToUnblock (int cardId) {
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("UPDATE CARDS SET user_request=? WHERE card_id=?")) {
+            pstmt.setString(1, "UNBLOCK_CARD");
+            pstmt.setLong(2, cardId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
+    public void cleanRequestToUnblock (int cardId) {
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("UPDATE CARDS SET user_request=? WHERE card_id=?")) {
+            pstmt.setString(1, "NO_REQUEST");
+            pstmt.setLong(2, cardId);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     @Override
@@ -116,6 +138,7 @@ public class CardDaoImpl implements CardDao {
             pstmt.setString(1, "ACTIVE");
             pstmt.setLong(2, cardId);
             pstmt.executeUpdate();
+            cleanRequestToUnblock(cardId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

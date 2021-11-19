@@ -7,11 +7,13 @@ import com.example.paymentproject.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+
 
 @WebServlet(name = "homepage", value = "/homepage")
 public class UserHomePageController extends HttpServlet {
@@ -26,13 +28,25 @@ public class UserHomePageController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String loginForm = req.getParameter("login");
-        User user =userService.getUserInfo(loginForm);
+        User user;
+        Cookie[] cookies = req.getCookies();
+        String login = null;
+        for (Cookie cookie : cookies) {
+            if (cookie.getName().equals("currentUser")) {
+                login = cookie.getValue();
+            }
+        }
+        user = userService.getUserInfo(login);
         try {
-            cardService.insertCard(Card.createCard(user));
-            resp.sendRedirect(req.getContextPath() + "/user-cards");
-        } catch (SQLException e) {
-            e.printStackTrace();
+            if (req.getParameter("button1") != null && userService.loginCheck(login, req.getParameter("password"))) {
+                try {
+                    cardService.insertCard(Card.createCard(user));
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
     }
 }
