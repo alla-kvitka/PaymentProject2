@@ -12,11 +12,8 @@
             <h1><a href="adminHomepage">Home</a></h1>
             <ul class="nav-ul">
                 <dir></dir>
-                <dir><a href="block">Block Card</a></dir>
-                <dir><a href="unblock">Unblock Card</a></dir>
-                <dir><a href="userBlock">Block User</a></dir>
-                <dir><a href="userUnblock">Unblock User</a></dir>
-                <dir><a href="allCards">All users</a></dir>
+                <dir><a href="allCards">All cards</a></dir>
+                <dir><a href="allUsers">All users</a></dir>
                 <dir><a href="logout">LogOut</a></dir>
             </ul>
         </nav>

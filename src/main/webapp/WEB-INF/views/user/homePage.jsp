@@ -15,7 +15,7 @@
 <div class="wrapper">
     <header role="banner">
         <nav role="navigation">
-            <h1><a href="homepage"><fmt:message key="header.home"/></a></h1>
+            <h1><a href="homepage">HOME</a></h1>
             <ul class="nav-ul">
                 <dir></dir>
                 <dir><a href="user-cards"><fmt:message key="header.MyCards"/></a></dir>
