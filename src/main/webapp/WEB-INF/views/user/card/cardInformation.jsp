@@ -1,7 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${requestScope.lang}"/>
+<fmt:setBundle basename="message"/>
 
-<html>
+<html lang="${requestScope.lang}">
 <head>
     <title>Card Information</title>
     <link rel="stylesheet" href="index.styl">
@@ -15,26 +19,38 @@
             <h1><a href="homepage">Home</a></h1>
             <ul class="nav-ul">
                 <dir></dir>
-                <dir><a href="user-cards">My cards</a></dir>
-                <dir><a href="transactions">Transactions history</a></dir>
-                <dir><a href="payment">Create Payment</a></dir>
-                <dir><a href="paymentSubmit">Submit Payment</a></dir>
-                <dir><a href="logout">LogOut</a></dir>
+                <dir><a href="user-cards"><fmt:message key="header.MyCards"/></a></dir>
+                <dir><a href="transactions"><fmt:message key="header.TransactionsHistory"/></a></dir>
+                <dir><a href="payment"><fmt:message key="header.CreatePayment"/></a></dir>
+                <dir><a href="paymentSubmit"><fmt:message key="header.SubmitPayment"/></a></dir>
+                <dir><a href="logout"><fmt:message key="header.LogOut"/></a></dir>
             </ul>
         </nav>
+        <c:choose>
+            <c:when test="${requestScope.lang == 'en'}">
+                <a href="javascript:settingsLang('uk')"
+                   class="nav-link text-secondary"><span
+                        class="text-center text-muted">UK</span></a>
+            </c:when>
+            <c:otherwise>
+                <a href="javascript:settingsLang('en')"
+                   class="nav-link text-secondary"><span
+                        class="text-center text-muted">EN</span></a>
+            </c:otherwise>
+        </c:choose>
     </header>
-    <h2 align="center">YOUR CARDS</h2>
+    <h2 align="center"><fmt:message key="message.YOURCARDS"/></h2>
 </div>
 
 <table align="center" width="80%">
     <thead>
     <tr>
-        <td>Bill ID</td>
-        <td>Card ID</td>
-        <td>Sum</td>
-        <td>Status</td>
-        <td>Block card</td>
-        <td> Request to admin</td>
+        <td><fmt:message key="table.BillID"/></td>
+        <td><fmt:message key="table.CardID"/></td>
+        <td><fmt:message key="table.Sum"/></td>
+        <td><fmt:message key="table.Status"/></td>
+        <td><fmt:message key="table.BlockCard"/></td>
+        <td><fmt:message key="table.RequestToAdmin"/></td>
     </tr>
     </thead>
     <tbody>
@@ -64,12 +80,16 @@
                 <input onclick="setTimeout(function () { window.location.reload(); }, 3)" type="submit" name="button2" value=${card.userRequest}>
                 </form>
             </td>
-
         </tr>
     </c:forEach>
     </tbody>
 </table>
-
+<script>
+    function settingsLang(lang) {
+        document.cookie = "lang=" + lang + "; path=/; max-age=" + (365 * 24 * 60 * 60);
+        location.reload();
+    }
+</script>
 
 <script type="text/javascript">
 

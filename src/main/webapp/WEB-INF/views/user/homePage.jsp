@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <fmt:setLocale value="${requestScope.lang}" />
 <fmt:setBundle basename="message" />
@@ -22,7 +23,6 @@
                 <dir><a href="payment"><fmt:message key="header.CreatePayment"/></a></dir>
                 <dir><a href="paymentSubmit"><fmt:message key="header.SubmitPayment"/></a></dir>
                 <dir><a href="logout"><fmt:message key="header.LogOut"/></a></dir>
-
             </ul>
         </nav>
         <c:choose>
