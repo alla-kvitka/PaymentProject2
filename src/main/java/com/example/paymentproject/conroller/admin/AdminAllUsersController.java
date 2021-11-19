@@ -1,7 +1,6 @@
 package com.example.paymentproject.conroller.admin;
 
-import com.example.paymentproject.entity.Card;
-import com.example.paymentproject.service.impl.CardServiceImpl;
+import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
@@ -16,27 +15,25 @@ import java.util.List;
 
 public class AdminAllUsersController extends HttpServlet {
 
-        UserServiceImpl userService = new UserServiceImpl();
-        CardServiceImpl cardService = new CardServiceImpl();
+    UserServiceImpl userService = new UserServiceImpl();
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        @Override
-        protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<User> users = userService.findUsers();
+        req.setAttribute("allUsers", users);
+        getServletContext().getRequestDispatcher("/WEB-INF/views/admin/adminAllUsers.jsp")
+                .forward(req, resp);
+    }
 
-            List<Card> allCards = cardService.findAllCards();
-            req.setAttribute("allCards", allCards);
-            getServletContext().getRequestDispatcher("/WEB-INF/views/admin/adminAllUsers.jsp")
-                    .forward(req, resp);
-        }
-
-        @Override
-        protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-            int userId = Integer.parseInt(req.getParameter("hidden"));
-            if (req.getParameter("button3") != null) {
-                userService.blockUser(userId);
-            } else if (req.getParameter("button4") != null) {
-                userService.unBlockUser(userId);
-            }
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int userId = Integer.parseInt(req.getParameter("hidden"));
+        if (req.getParameter("button3") != null) {
+            userService.blockUser(userId);
+        } else if (req.getParameter("button4") != null) {
+            userService.unBlockUser(userId);
         }
     }
+}
 

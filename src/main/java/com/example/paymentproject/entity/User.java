@@ -25,13 +25,16 @@ public class User {
         return user;
     }
 
-    public User(int userId, String userLogin, String userPassword, String userEmail, Role role, long userBill) {
+    public User(int userId, String userLogin, String userPassword,
+                String userEmail, Role role, long userBill, UserStatus userStatus) {
         this.userId = userId;
         this.userLogin = userLogin;
         this.userPassword = userPassword;
         this.userEmail = userEmail;
         this.role = role;
         this.userBill = userBill;
+        this.userStatus=userStatus;
+
     }
 
     public int getUserId() {

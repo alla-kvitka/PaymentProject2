@@ -18,7 +18,7 @@ public class UserDaoImpl implements UserDao {
     public void unBlockUser(int userId) {
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
-                     ("UPDATE USERD SET user_status=? WHERE user_id=?")) {
+                     ("UPDATE USERS SET user_status=? WHERE user_id=?")) {
             pstmt.setString(1, "ACTIVE");
             pstmt.setLong(2, userId);
             pstmt.executeUpdate();
@@ -40,7 +40,7 @@ public class UserDaoImpl implements UserDao {
     public void blockUser(int userId) {
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
-                     ("UPDATE USERD SET user_status=? WHERE user_id=?")) {
+                     ("UPDATE USERS SET user_status=? WHERE user_id=?")) {
             pstmt.setString(1, "BLOCKED");
             pstmt.setLong(2, userId);
             pstmt.executeUpdate();
@@ -183,13 +183,16 @@ public class UserDaoImpl implements UserDao {
         List<User> users = new ArrayList<>();
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM users")) {
+             PreparedStatement pstmt = connection.prepareStatement("SELECT user_id, user_login, user_email,user_status FROM users " +
+                     "WHERE user_role like 'USER'")) {
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                users.add(new User(rs.getInt(1), rs.getString(2),
-                        rs.getString(3), rs.getString(4),
-                        Role.valueOf(rs.getString(5)),
-                        rs.getInt(6)));
+                User user= new User();
+                user.setUserId(rs.getInt(1));
+                user.setUserLogin(rs.getString(2));
+                user.setUserEmail(rs.getString(3));
+                user.setUserStatus(UserStatus.valueOf(rs.getString(4)));
+                users.add(user);
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());
