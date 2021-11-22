@@ -17,5 +17,5 @@ public interface PaymentService {
 
     List<Payment> searchAllCreatedPayments(int userId);
 
-    List<Transaction> searchAllUserTransaction(int userId);
+    List<Transaction> searchAllUserTransaction( int pagenumber, int size, int userId);
 }

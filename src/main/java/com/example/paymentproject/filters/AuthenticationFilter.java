@@ -32,7 +32,6 @@ public class AuthenticationFilter implements Filter {
         if (session == null || session.getAttribute("user") == null) {
             response.sendRedirect(request.getContextPath() + "/login");
         } else {
-            response.sendRedirect(request.getContextPath() + "/homepage");
             filterChain.doFilter(request, response);
         }
 

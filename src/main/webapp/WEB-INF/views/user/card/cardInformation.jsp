@@ -71,7 +71,7 @@
             <td>
                 <form  action="${pageContext.request.contextPath}/user-cards" method="post">
                     <input type="hidden" name="hidden" value="${card.cardId}">
-                    <input onclick="setTimeout(function () { window.location.reload(); }, 3)" type="submit" name="button1" value="Block card"/>
+                    <input onclick="setTimeout(function () { window.location.reload(); }, 3)" type="submit" name="button1" value=<fmt:message key="table.BlockCard"/>/>
                 </form>
             </td>
             <td>
@@ -84,6 +84,34 @@
     </c:forEach>
     </tbody>
 </table>
+
+<%--For displaying Previous link except for the 1st page --%>
+<c:if test="${currentPage != 1}">
+    <td><a href="user-cards?page=${currentPage - 1}">Previous</a></td>
+</c:if>
+
+<%--For displaying Page numbers.
+The when condition does not display a link for the current page--%>
+<table border="1" cellpadding="5" cellspacing="5">
+    <tr>
+        <c:forEach begin="1" end="${noOfPages}" var="i">
+            <c:choose>
+                <c:when test="${currentPage eq i}">
+                    <td>${i}</td>
+                </c:when>
+                <c:otherwise>
+                    <td><a href="user-cards?page=${i}">${i}</a></td>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+    </tr>
+</table>
+
+<%--For displaying Next link --%>
+<c:if test="${currentPage lt noOfPages}">
+    <td><a href="user-cards?page=${currentPage + 1}">Next</a></td>
+</c:if>
+
 <script>
     function settingsLang(lang) {
         document.cookie = "lang=" + lang + "; path=/; max-age=" + (365 * 24 * 60 * 60);

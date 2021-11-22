@@ -18,5 +18,7 @@ public interface PaymentDao {
 
     List<Payment> searchAllCreatedPayments(int userId);
 
-    List<Transaction> searchAllUserTransaction(int userId);
+    List<Transaction> searchAllUserTransaction(int pageNumber, int size, int userId);
+
+    int countOfAllUserTransactions(int userId);
 }

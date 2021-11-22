@@ -76,7 +76,7 @@ public class UserDaoImpl implements UserDao {
                 pstmt.setString(4, user.getUserEmail());
                 pstmt.setString(5, user.getRole().toString());
                 pstmt.setLong(6, user.getUserBill());
-                pstmt.setString(7,user.getUserStatus().toString());
+                pstmt.setString(7, user.getUserStatus().toString());
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {
@@ -179,15 +179,54 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public List<User> findAllUsers() {
+    public int countOfAllUsers() {
+        ResultSet rs = null;
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt =
+                     connection.prepareStatement("SELECT COUNT(*)" +
+                             " FROM USERS ")) {
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int countOfAllUserCards(int userId) {
+        ResultSet rs;
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt =
+                     connection.prepareStatement("SELECT COUNT(*)" +
+                             " FROM CARDS WHERE user_id=?")) {
+            pstmt.setInt(1, userId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public List<User> findAllUsers(int pageNumber, int size) {
         List<User> users = new ArrayList<>();
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstmt = connection.prepareStatement("SELECT user_id, user_login, user_email,user_status FROM users " +
-                     "WHERE user_role like 'USER'")) {
+             PreparedStatement pstmt = connection.prepareStatement("SELECT user_id, user_login," +
+                     " user_email, user_status FROM users " +
+                     "WHERE user_role like 'USER' ORDER BY user_id  LIMIT ?, ?")) {
+            pstmt.setInt(1, (pageNumber - 1) * size);
+            pstmt.setInt(2, size);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                User user= new User();
+                User user = new User();
                 user.setUserId(rs.getInt(1));
                 user.setUserLogin(rs.getString(2));
                 user.setUserEmail(rs.getString(3));

@@ -19,11 +19,13 @@ public interface CardService {
 
     void unBlockCard(int cardId);
 
-    public List<Card> findAllUsersCards(int userid);
+    public List<Card> findAllUserCards(int userid, int page, int size);
 
-    List<Card> findAllCards();
+    List<Card> findAllCards(int pageNumber, int size);
 
     void updateBalAfterSubmit (Payment payment);
 
     void requestToUnblock (int cardId);
+
+   int countOfAllUsersCards();
 }

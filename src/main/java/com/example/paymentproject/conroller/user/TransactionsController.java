@@ -24,8 +24,11 @@ public class TransactionsController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        //замінити витгування логіна на сесію
+        int page = 1;
+        int size = 5;
+        if (req.getParameter("page") != null) {
+            page = Integer.parseInt(req.getParameter("page"));
+        }
         Cookie[] cookies = req.getCookies();
         String login = null;
         for (Cookie cookie : cookies) {
@@ -34,9 +37,13 @@ public class TransactionsController extends HttpServlet {
             }
         }
         User user = userService.getUserInfo(login);
-        List<Transaction> transactionList = paymentService.searchAllUserTransaction(user.getUserId());
+        List<Transaction> transactionList = paymentService.searchAllUserTransaction(page, size, user.getUserId());
+        int noOfRecords = paymentService.getNoOfRecords(user.getUserId());
+        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / size);
         req.setAttribute("transaction", transactionList);
-        RequestDispatcher view = getServletContext().getRequestDispatcher("/WEB-INF/views/user/payments/transactionsHistory.jsp");
+        req.setAttribute("noOfPages", noOfPages);
+        req.setAttribute("currentPage", page);
+        RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/views/user/payments/transactionsHistory.jsp");
         view.forward(req, resp);
     }
 
@@ -44,5 +51,4 @@ public class TransactionsController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
     }
-
 }

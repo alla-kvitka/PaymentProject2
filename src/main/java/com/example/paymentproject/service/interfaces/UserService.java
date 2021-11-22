@@ -20,7 +20,11 @@ public interface UserService {
 
     boolean loginCheck(String login, String password) throws SQLException;
 
-    List<User> findUsers();
+    List<User> findUsers(int pageNumber, int size);
 
     User getUserById(int userID);
+
+    int countOfAllUsersCards();
+
+    int countOfAllUserCards(int userid);
 }

@@ -145,17 +145,22 @@ public class CardDaoImpl implements CardDao {
     }
 
     @Override
-    public List<Card> findAllUsersCards(int userid) {
+    public List<Card> findAllUserCards(int userid, int pageNumber, int size) {
         List<Card> cards = new ArrayList<>();
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM cards where user_id = ?")) {
+             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM cards where user_id = ? " +
+                     " ORDER by card_id LIMIT ?, ?")) {
             pstmt.setLong(1, userid);
+            pstmt.setInt(2, (pageNumber - 1) * size);
+            pstmt.setInt(3, size);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 cards.add(new Card(rs.getInt(1), rs.getInt(2),
-                        rs.getLong(3), rs.getLong(4), CardStatus.valueOf(rs.getString(5)),
-                        UserStatus.valueOf(rs.getString(6)), UserRequest.valueOf(rs.getString(7))));
+                        rs.getLong(3), rs.getLong(4),
+                        CardStatus.valueOf(rs.getString(5)),
+                        UserStatus.valueOf(rs.getString(6)),
+                        UserRequest.valueOf(rs.getString(7))));
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());
@@ -165,12 +170,33 @@ public class CardDaoImpl implements CardDao {
         return cards;
     }
 
+
+    public int countOfAllUsersCards(){
+        ResultSet rs = null;
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt =
+                     connection.prepareStatement("SELECT COUNT(*)" +
+                             " FROM CARDS ")) {
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+
+    }
+
     @Override
-    public List<Card> findAllCards() {
+    public List<Card> findAllCards(int pageNumber, int size) {
         List<Card> cards = new ArrayList<>();
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM cards")) {
+             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM cards ORDER BY card_id  LIMIT ?, ? ")) {
+            pstmt.setInt(1, (pageNumber - 1) * size);
+            pstmt.setInt(2, size);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 cards.add(new Card(rs.getInt(1), rs.getInt(2),

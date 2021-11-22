@@ -11,6 +11,7 @@ public class User {
     private Role role;
     private long userBill;
     private UserStatus userStatus;
+
     public User() {
     }
 
@@ -33,7 +34,7 @@ public class User {
         this.userEmail = userEmail;
         this.role = role;
         this.userBill = userBill;
-        this.userStatus=userStatus;
+        this.userStatus = userStatus;
 
     }
 
@@ -93,4 +94,8 @@ public class User {
         this.userStatus = userStatus;
     }
 
+    @Override
+    public String toString() {
+        return "user login: " + userLogin;
+    }
 }

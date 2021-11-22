@@ -43,12 +43,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUsers() {
-        return userDaoImpl.findAllUsers();
+    public List<User> findUsers(int pageNumber, int size) {
+        return userDaoImpl.findAllUsers(pageNumber,size);
     }
 
     @Override
     public User getUserById(int userID) {
         return userDaoImpl.getUserById(userID);
+    }
+
+    @Override
+    public int countOfAllUsersCards() {
+        return userDaoImpl.countOfAllUsers();
+    }
+
+    @Override
+    public int countOfAllUserCards(int userid) {
+        return userDaoImpl.countOfAllUserCards(userid);
     }
 }

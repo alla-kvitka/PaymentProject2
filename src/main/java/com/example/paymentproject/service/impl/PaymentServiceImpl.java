@@ -36,7 +36,11 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     @Override
-    public List<Transaction> searchAllUserTransaction(int userId) {
-        return paymentDao.searchAllUserTransaction(userId);
+    public List<Transaction> searchAllUserTransaction(int pageNumber, int size, int userId) {
+        return paymentDao.searchAllUserTransaction(pageNumber,size, userId);
+    }
+
+    public int getNoOfRecords(int userId) {
+      return paymentDao.countOfAllUserTransactions(userId);
     }
 }

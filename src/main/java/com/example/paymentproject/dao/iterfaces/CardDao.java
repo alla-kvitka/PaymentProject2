@@ -20,11 +20,12 @@ public interface CardDao {
     void unBlockCard(int cardId);
 
     void requestToUnblock (int cardId);
-    public List<Card> findAllUsersCards(int userid);
+    public List<Card> findAllUserCards(int userid, int page, int size);
 
     Card searchCardByCardId(int cardId);
 
-    List<Card> findAllCards();
+    List<Card> findAllCards(int pageNumber, int size);
+
     void updateBalAfterSubmit(Payment payment);
 
 }

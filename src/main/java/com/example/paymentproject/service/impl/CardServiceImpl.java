@@ -20,10 +20,10 @@ public class CardServiceImpl implements CardService {
     public Card searchCardById(int userId) {
         return cardDao.searchCardById(userId);
     }
+
     public Card searchCardByCardId(int cardId) {
         return cardDao.searchCardByCardId(cardId);
     }
-
 
     @Override
     public void deleteCard(Card card) {
@@ -41,14 +41,15 @@ public class CardServiceImpl implements CardService {
     }
 
     @Override
-    public List<Card> findAllUsersCards(int userid) {
-        return cardDao.findAllUsersCards(userid);
+    public List<Card> findAllUserCards(int userid, int page, int size) {
+        return cardDao.findAllUserCards(userid, page, size);
     }
 
     @Override
-    public List<Card> findAllCards() {
-        return cardDao.findAllCards();
+    public List<Card> findAllCards(int pageNumber, int size) {
+        return cardDao.findAllCards( pageNumber,  size);
     }
+
     @Override
     public void updateBalAfterSubmit(Payment payment) {
         cardDao.updateBalAfterSubmit(payment);
@@ -57,5 +58,10 @@ public class CardServiceImpl implements CardService {
     @Override
     public void requestToUnblock(int cardId) {
         cardDao.requestToUnblock(cardId);
+    }
+
+    @Override
+    public int countOfAllUsersCards() {
+        return cardDao.countOfAllUsersCards();
     }
 }

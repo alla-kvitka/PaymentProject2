@@ -19,9 +19,19 @@ public class AdminAllUsersController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int page = 1;
+        int size = 5;
+        if (req.getParameter("page") != null) {
+            page = Integer.parseInt(req.getParameter("page"));
+        }
+        int noOfRecords = userService.countOfAllUsersCards();
+        int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / size);
 
-        List<User> users = userService.findUsers();
+        List<User> users = userService.findUsers(page, size);
         req.setAttribute("allUsers", users);
+        req.setAttribute("noOfPages", noOfPages);
+        req.setAttribute("currentPage", page);
+
         getServletContext().getRequestDispatcher("/WEB-INF/views/admin/adminAllUsers.jsp")
                 .forward(req, resp);
     }

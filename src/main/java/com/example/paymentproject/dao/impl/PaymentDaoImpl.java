@@ -68,14 +68,17 @@ public class PaymentDaoImpl implements PaymentDao {
     }
 
     @Override
-    public List<Transaction> searchAllUserTransaction(int userId) {
+    public List<Transaction> searchAllUserTransaction(int pageNumber, int size, int userId) {
         List<Transaction> transactionList = new ArrayList<>();
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt =
                      connection.prepareStatement("SELECT tr_date, card_id, payment_sum, payment_type " +
-                             " FROM TRANSACTION_HISTORY WHERE `user_id` = ? ORDER BY card_id")) {
+                             " FROM TRANSACTION_HISTORY WHERE `user_id` = ? ORDER BY card_id" +
+                             " LIMIT ?, ? ")) {
             pstmt.setLong(1, userId);
+            pstmt.setInt(2, (pageNumber - 1) * size);
+            pstmt.setInt(3, size);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 Transaction transaction = new Transaction();
@@ -92,6 +95,28 @@ public class PaymentDaoImpl implements PaymentDao {
         }
         return transactionList;
     }
+
+    @Override
+    public int countOfAllUserTransactions(int userId) {
+        ResultSet rs = null;
+        try (Connection connection = DBConnection.getInstance().getConnection();
+             PreparedStatement pstmt =
+                     connection.prepareStatement("SELECT COUNT(*)" +
+                             " FROM TRANSACTION_HISTORY WHERE `user_id` = ?")) {
+            pstmt.setLong(1, userId);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return 0;
+    }
+
+
+
 
 
     @Override

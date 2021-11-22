@@ -4,12 +4,5 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
          http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
-    <filter>
-        <filter-name>LanguageFilter</filter-name>
-        <filter-class>com.example.paymentproject.filters.LanguageFilter</filter-class>
-    </filter>
-    <filter-mapping>
-        <filter-name>LanguageFilter</filter-name>
-        <url-pattern>/Gradle___com_example___PaymentProject_1_0_SNAPSHOT_war/*</url-pattern>
-    </filter-mapping>
+
 </web-app>

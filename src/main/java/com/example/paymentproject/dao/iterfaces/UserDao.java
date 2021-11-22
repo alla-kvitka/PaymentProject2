@@ -21,9 +21,11 @@ public interface UserDao {
 
     boolean checkPassLogin(String login, String password) throws SQLException;
 
-    List<User> findAllUsers();
+    List<User> findAllUsers(int pageNumber, int size);
 
     User getUserById(int userID);
 
+    int countOfAllUsers ();
 
+    int countOfAllUserCards(int userid);
 }

@@ -34,7 +34,6 @@
             </c:otherwise>
         </c:choose>
     </header>
-
     <h2 align="center"><fmt:message key="message.ENTERYOUR"/></h2>
     <h2 align="center"><fmt:message key="message.CREDENTIALS"/></h2>
     <form align="center" method=post>
