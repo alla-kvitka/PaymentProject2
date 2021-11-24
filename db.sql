@@ -13,7 +13,7 @@ CREATE TABLE users
 );
 
 INSERT INTO users
-VALUES (123182241, 'akvitka', '20121997', 'invariant17@gmail.com', 'ADMIN', 12731811248247, 'ACTIVE');
+VALUES (123182241, 'akvitka', 'fd15244472166709fc2c1bcbe6e6a2e1', 'invariant17@gmail.com', 'ADMIN', 12731811248247, 'ACTIVE');
 
 
 

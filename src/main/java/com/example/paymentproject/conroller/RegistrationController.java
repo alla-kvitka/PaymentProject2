@@ -43,9 +43,9 @@ public class RegistrationController extends HttpServlet {
         } else if (!password.equals(passwordRepeat)) {
             LOGGER.error("Password and password-repeat are not equals");
         } else if (userService.checkExistForUser(userService.createUser(login,
-                password, email))) {
+                Utils.encryptPassword(password), email))) {
             User user = userService.createUser(userService.createUser(login,
-                    password, email));
+                    Utils.encryptPassword(password), email));
             LOGGER.info("User was created successful");
             try {
                 cardService.insertCard(cardService.createCard(user));

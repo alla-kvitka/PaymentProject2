@@ -56,14 +56,12 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     public User insertUser(User user) {
         long randomBill = Utils.randomLong();
         int userIdRandom = Utils.randomInt();
-        String MD5Password = Utils.md5Apache(user.getUserPassword());
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
                      ("INSERT INTO USERS VALUES (?, ?, ?, ?,?,?,?)",
@@ -73,7 +71,7 @@ public class UserDaoImpl implements UserDao {
                 user.setUserBill(randomBill);
                 pstmt.setLong(1, user.getUserId());
                 pstmt.setString(2, user.getUserLogin());
-                pstmt.setString(3, MD5Password);
+                pstmt.setString(3, user.getUserPassword());
                 pstmt.setString(4, user.getUserEmail());
                 pstmt.setString(5, user.getRole().toString());
                 pstmt.setLong(6, user.getUserBill());

@@ -4,6 +4,7 @@ import com.example.paymentproject.entity.Enums.Role;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.exeption.UserNotFoundException;
 import com.example.paymentproject.service.impl.UserServiceImpl;
+import com.example.paymentproject.utils.Utils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -30,7 +31,7 @@ public class LoginController extends HttpServlet {
             LOGGER.error("Error message: login/password cannot be empty");
         }
         try {
-            if (userService.loginCheck(login, password)) {
+            if (userService.loginCheck(login, Utils.encryptPassword(password))) {
                 LOGGER.info("INFO message: Login process starts with login: "
                         + login + " password " + password);
                 HttpSession newSession = req.getSession(true);

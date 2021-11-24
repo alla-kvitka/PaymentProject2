@@ -35,7 +35,7 @@ public class CardDaoImpl implements CardDao {
         return card;
     }
 
-    public void requestToUnblock (int cardId) {
+    public void requestToUnblock(int cardId) {
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
                      ("UPDATE CARDS SET user_request=? WHERE card_id=?")) {
@@ -47,7 +47,7 @@ public class CardDaoImpl implements CardDao {
         }
     }
 
-    public void cleanRequestToUnblock (int cardId) {
+    public void cleanRequestToUnblock(int cardId) {
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt = connection.prepareStatement
                      ("UPDATE CARDS SET user_request=? WHERE card_id=?")) {
@@ -64,7 +64,8 @@ public class CardDaoImpl implements CardDao {
         Card card = null;
         ResultSet result = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM CARDS WHERE user_id=?")) {
+             PreparedStatement pstm = connection.
+                     prepareStatement("SELECT * FROM CARDS WHERE user_id=?")) {
             pstm.setInt(1, userId);
             result = pstm.executeQuery();
             if (result.next()) {
@@ -89,7 +90,8 @@ public class CardDaoImpl implements CardDao {
         Card card = null;
         ResultSet result = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstm = connection.prepareStatement("SELECT * FROM CARDS WHERE card_id=?")) {
+             PreparedStatement pstm = connection.
+                     prepareStatement("SELECT * FROM CARDS WHERE card_id=?")) {
             pstm.setInt(1, cardId);
             result = pstm.executeQuery();
             if (result.next()) {
@@ -145,8 +147,9 @@ public class CardDaoImpl implements CardDao {
         List<Card> cards = new ArrayList<>();
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM cards where user_id = ? " +
-                     " ORDER by card_id LIMIT ?, ?")) {
+             PreparedStatement pstmt = connection.
+                     prepareStatement("SELECT * FROM cards where user_id = ? " +
+                             " ORDER by card_id LIMIT ?, ?")) {
             pstmt.setLong(1, userid);
             pstmt.setInt(2, (pageNumber - 1) * size);
             pstmt.setInt(3, size);
@@ -166,7 +169,7 @@ public class CardDaoImpl implements CardDao {
         return cards;
     }
 
-    public int countOfAllUsersCards(){
+    public int countOfAllUsersCards() {
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
              PreparedStatement pstmt =
@@ -188,14 +191,17 @@ public class CardDaoImpl implements CardDao {
         List<Card> cards = new ArrayList<>();
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstmt = connection.prepareStatement("SELECT * FROM cards ORDER BY card_id  LIMIT ?, ? ")) {
+             PreparedStatement pstmt = connection.
+                     prepareStatement("SELECT * FROM cards ORDER BY card_id  LIMIT ?, ? ")) {
             pstmt.setInt(1, (pageNumber - 1) * size);
             pstmt.setInt(2, size);
             rs = pstmt.executeQuery();
             while (rs.next()) {
                 cards.add(new Card(rs.getInt(1), rs.getInt(2),
-                        rs.getLong(3), rs.getLong(4), CardStatus.valueOf(rs.getString(5)),
-                        UserStatus.valueOf(rs.getString(6)), UserRequest.valueOf(rs.getString(7))));
+                        rs.getLong(3), rs.getLong(4),
+                        CardStatus.valueOf(rs.getString(5)),
+                        UserStatus.valueOf(rs.getString(6)),
+                        UserRequest.valueOf(rs.getString(7))));
             }
         } catch (SQLException e) {
             System.out.println(e.getErrorCode());
@@ -209,7 +215,8 @@ public class CardDaoImpl implements CardDao {
     public void updateBalAfterSubmit(Payment payment) {
         Card card = searchCardByCardId(payment.getCardId());
         try (Connection connection = DBConnection.getInstance().getConnection();
-             PreparedStatement pstmt = connection.prepareStatement("UPDATE CARDS SET card_sum=? WHERE card_id=?")) {
+             PreparedStatement pstmt = connection.prepareStatement
+                     ("UPDATE CARDS SET card_sum=? WHERE card_id=?")) {
             pstmt.setLong(2, payment.getCardId());
             if (payment.getTransactionType().equalsIgnoreCase("positive"))
                 pstmt.setInt(1, (int) (payment.getPaymentSum() + card.getCardSum()));

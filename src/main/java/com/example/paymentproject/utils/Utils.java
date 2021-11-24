@@ -1,5 +1,6 @@
 package com.example.paymentproject.utils;
 
+
 import org.apache.commons.codec.digest.DigestUtils;
 
 import java.security.SecureRandom;
@@ -31,8 +32,7 @@ public class Utils {
         return matcher.matches();
     }
 
-    public static String md5Apache(String st) {
-        String md5Hex = DigestUtils.md5Hex(st);
-        return md5Hex;
+    public static String encryptPassword(String st) {
+        return DigestUtils.md5Hex(st);
     }
 }

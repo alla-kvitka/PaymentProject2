@@ -51,4 +51,3 @@ public class AdminAllUsersController extends HttpServlet {
         super.destroy();
     }
 }
-
