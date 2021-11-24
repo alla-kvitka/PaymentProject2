@@ -3,6 +3,7 @@ package com.example.paymentproject.conroller.user;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.impl.CardServiceImpl;
 import com.example.paymentproject.service.impl.UserServiceImpl;
+import com.example.paymentproject.utils.Utils;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -20,7 +21,6 @@ public class UserHomePageController extends HttpServlet {
     CardServiceImpl cardService = new CardServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
     private static final Logger LOGGER = Logger.getLogger(UserHomePageController.class);
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -40,7 +40,8 @@ public class UserHomePageController extends HttpServlet {
         user = userService.getUserInfo(login);
         try {
             if (req.getParameter("button1") != null &&
-                    userService.loginCheck(login, req.getParameter("password"))) {
+                    userService.loginCheck(login,
+                            Utils.encryptPassword(req.getParameter("password")))) {
                 try {
                     cardService.insertCard(cardService.createCard(user));
                     LOGGER.info("User" + user.getUserId() + "created new card ");

@@ -47,7 +47,9 @@
         <h2 align="center"><fmt:message key="message.create"/></h2>
         <div class="row">
             <form action="${pageContext.request.contextPath}/homepage" method="post">
-                <input placeholder=<fmt:message key="form.Password"/> type='text' name='password'/>
+                <label>
+                    <input placeholder=<fmt:message key="form.Password"/> type='password' name='password'/>
+                </label>
                 <input onclick="setTimeout(function () { window.location.reload(); }, 3)"
                        type="submit" name="button1" value="Create card"/>
             </form>

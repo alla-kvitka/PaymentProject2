@@ -20,7 +20,8 @@ public class AuthorizationFilter implements Filter {
         final HttpSession session = request.getSession();
         String servletPath = request.getServletPath();
 
-        if (request.getServletPath().equals("/login") || request.getServletPath().equals("/registration")
+        if (request.getServletPath().equals("/login")
+                || request.getServletPath().equals("/registration")
                 || request.getServletPath().equals("/index.jsp")) {
             filterChain.doFilter(request, response);
         }
