@@ -116,9 +116,6 @@ public class PaymentDaoImpl implements PaymentDao {
     }
 
 
-
-
-
     @Override
     public void submitPayment(Payment payment) {
         try (Connection connection = DBConnection.getInstance().getConnection();

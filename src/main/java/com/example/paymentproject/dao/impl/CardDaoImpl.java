@@ -59,7 +59,6 @@ public class CardDaoImpl implements CardDao {
         }
     }
 
-
     @Override
     public Card searchCardById(int userId) {
         Card card = null;
@@ -84,7 +83,6 @@ public class CardDaoImpl implements CardDao {
         }
         return card;
     }
-
 
     @Override
     public Card searchCardByCardId(int cardId) {
@@ -111,10 +109,8 @@ public class CardDaoImpl implements CardDao {
         return card;
     }
 
-
     @Override
     public void deleteCard(Card card) {
-
     }
 
     @Override
@@ -170,7 +166,6 @@ public class CardDaoImpl implements CardDao {
         return cards;
     }
 
-
     public int countOfAllUsersCards(){
         ResultSet rs = null;
         try (Connection connection = DBConnection.getInstance().getConnection();
@@ -186,7 +181,6 @@ public class CardDaoImpl implements CardDao {
             throwables.printStackTrace();
         }
         return 0;
-
     }
 
     @Override

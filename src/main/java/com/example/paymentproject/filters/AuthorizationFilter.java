@@ -12,8 +12,6 @@ import java.io.IOException;
 
 @WebFilter("/*")
 public class AuthorizationFilter implements Filter {
-
-
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse,
                          FilterChain filterChain) throws IOException, ServletException {
@@ -26,11 +24,8 @@ public class AuthorizationFilter implements Filter {
                 || request.getServletPath().equals("/index.jsp")) {
             filterChain.doFilter(request, response);
         }
-
         User user = (User) session.getAttribute("user");
-
         Role role = Optional.ofNullable(user).map(User::getRole).orElse(null);
-
         if ((servletPath.contains("/payment") && Role.USER.equals(role))
                 || (servletPath.contains("/paymentSubmit") && Role.USER.equals(role))
                 || (servletPath.contains("/transactions") && Role.USER.equals(role))
@@ -42,9 +37,4 @@ public class AuthorizationFilter implements Filter {
             filterChain.doFilter(request, response);
         }
     }
-
-
-    public void destroy() {
-    }
-
 }

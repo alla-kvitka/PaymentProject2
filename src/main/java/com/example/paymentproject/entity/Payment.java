@@ -9,7 +9,6 @@ public class Payment {
     private String transactionType;
     private int status;
 
-
     public Payment() {
     }
 
@@ -22,19 +21,6 @@ public class Payment {
         this.paymentSum = paymentSum;
         this.transactionType = transactionType;
         this.status = status;
-    }
-
-
-    public static Payment createPayment(Card card, String transactionType,
-                                        int sum) {
-        Payment payment = new Payment();
-        payment.setUserId(card.getUserId());
-        payment.setCardId(card.getCardId());
-        payment.setPaymentSum(sum);
-        payment.setTransactionType(transactionType);
-        payment.setBillId(card.getBillId());
-        payment.setStatus(0);
-        return payment;
     }
 
     public int getStatus() {

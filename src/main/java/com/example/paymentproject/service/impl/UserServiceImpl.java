@@ -1,6 +1,8 @@
 package com.example.paymentproject.service.impl;
 
 import com.example.paymentproject.dao.impl.UserDaoImpl;
+import com.example.paymentproject.entity.Enums.Role;
+import com.example.paymentproject.entity.Enums.UserStatus;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.interfaces.UserService;
 
@@ -9,6 +11,17 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     UserDaoImpl userDaoImpl = new UserDaoImpl();
+
+
+    public  User createUser(String login, String password, String email) {
+        User user = new User();
+        user.setUserLogin(login);
+        user.setUserPassword(password);
+        user.setUserEmail(email);
+        user.setRole(Role.USER);
+        user.setUserStatus(UserStatus.ACTIVE);
+        return user;
+    }
 
     @Override
     public User createUser(User user) {

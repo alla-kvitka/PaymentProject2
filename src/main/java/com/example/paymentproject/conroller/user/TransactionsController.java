@@ -4,6 +4,7 @@ import com.example.paymentproject.entity.Transaction;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.impl.PaymentServiceImpl;
 import com.example.paymentproject.service.impl.UserServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,9 +18,9 @@ import java.util.List;
 
 @WebServlet(name = "transactions", value = "/transactions")
 public class TransactionsController extends HttpServlet {
-
     PaymentServiceImpl paymentService = new PaymentServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
+    private static final Logger LOGGER = Logger.getLogger(TransactionsController.class);
 
 
     @Override
@@ -43,6 +44,7 @@ public class TransactionsController extends HttpServlet {
         req.setAttribute("transaction", transactionList);
         req.setAttribute("noOfPages", noOfPages);
         req.setAttribute("currentPage", page);
+        LOGGER.info("User " + user.getUserId() + " get transactions" + transactionList);
         RequestDispatcher view = req.getRequestDispatcher("/WEB-INF/views/user/payments/transactionsHistory.jsp");
         view.forward(req, resp);
     }

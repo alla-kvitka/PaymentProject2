@@ -16,15 +16,7 @@ public class User {
     }
 
 
-    public static User createUser(String login, String password, String email) {
-        User user = new User();
-        user.setUserLogin(login);
-        user.setUserPassword(password);
-        user.setUserEmail(email);
-        user.setRole(Role.USER);
-        user.setUserStatus(UserStatus.ACTIVE);
-        return user;
-    }
+
 
     public User(int userId, String userLogin, String userPassword,
                 String userEmail, Role role, long userBill, UserStatus userStatus) {

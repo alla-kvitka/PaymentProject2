@@ -25,13 +25,10 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-
         if (login.equals("") || password.equals("")) {
             resp.sendRedirect(req.getContextPath() + "/login");
             LOGGER.error("Error message: login/password cannot be empty");
         }
-
-
         try {
             if (userService.loginCheck(login, password)) {
                 LOGGER.info("INFO message: Login process starts with login: "
@@ -43,11 +40,12 @@ public class LoginController extends HttpServlet {
                 Cookie message = new Cookie("currentUser", login);
                 resp.addCookie(message);
                 if (user.getRole().equals(Role.USER)) {
-                    LOGGER.info("Login as USER Success");
+                    LOGGER.info("Login as USER" + user.getUserId() + "Success");
                     resp.sendRedirect(req.getContextPath() + "/homepage");
-                } else if (user.getRole().equals(Role.ADMIN))
+                } else if (user.getRole().equals(Role.ADMIN)) {
+                    LOGGER.info("Login as ADMIN" + user.getUserId() + " Success");
                     resp.sendRedirect(req.getContextPath() + "/adminHomepage");
-                LOGGER.info("Login as ADMIN Success");
+                }
             } else {
                 LOGGER.error("Error message: Cannot find user with such login/password");
                 throw new UserNotFoundException(login);
@@ -58,6 +56,6 @@ public class LoginController extends HttpServlet {
     }
 
     public void destroy() {
+        super.destroy();
     }
-
 }

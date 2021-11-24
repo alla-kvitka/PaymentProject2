@@ -13,8 +13,6 @@ import java.io.IOException;
 
 @WebServlet(name = "adminHomepage", value = "/adminHomepage")
 public class AdminHomeController extends HttpServlet {
-
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Cookie[] cookies = req.getCookies();
@@ -28,7 +26,8 @@ public class AdminHomeController extends HttpServlet {
         User user = userService.getUserInfo(login);
         req.setAttribute("login", user.getUserLogin());
         req.setAttribute("email", user.getUserEmail());
-        getServletContext().getRequestDispatcher("/WEB-INF/views/admin/adminHomePage.jsp").forward(req, resp);
+        getServletContext().getRequestDispatcher
+                ("/WEB-INF/views/admin/adminHomePage.jsp").forward(req, resp);
     }
 
     @Override

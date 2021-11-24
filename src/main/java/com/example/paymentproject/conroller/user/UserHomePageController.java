@@ -1,9 +1,9 @@
 package com.example.paymentproject.conroller.user;
 
-import com.example.paymentproject.entity.Card;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.impl.CardServiceImpl;
 import com.example.paymentproject.service.impl.UserServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +19,7 @@ import java.sql.SQLException;
 public class UserHomePageController extends HttpServlet {
     CardServiceImpl cardService = new CardServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
+    private static final Logger LOGGER = Logger.getLogger(UserHomePageController.class);
 
 
     @Override
@@ -38,15 +39,17 @@ public class UserHomePageController extends HttpServlet {
         }
         user = userService.getUserInfo(login);
         try {
-            if (req.getParameter("button1") != null && userService.loginCheck(login, req.getParameter("password"))) {
+            if (req.getParameter("button1") != null &&
+                    userService.loginCheck(login, req.getParameter("password"))) {
                 try {
-                    cardService.insertCard(Card.createCard(user));
+                    cardService.insertCard(cardService.createCard(user));
+                    LOGGER.info("User" + user.getUserId() + "created new card ");
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
             }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

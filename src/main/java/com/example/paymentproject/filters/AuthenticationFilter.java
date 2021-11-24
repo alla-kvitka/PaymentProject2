@@ -15,7 +15,6 @@ import javax.servlet.http.HttpSession;
 
 @WebFilter("/Gradle___com_example___PaymentProject_1_0_SNAPSHOT_war/*")
 public class AuthenticationFilter implements Filter {
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException  {
         Filter.super.init(filterConfig);
@@ -26,7 +25,6 @@ public class AuthenticationFilter implements Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
-
         HttpSession session = request.getSession(false);
 
         if (session == null || session.getAttribute("user") == null) {
@@ -35,10 +33,5 @@ public class AuthenticationFilter implements Filter {
             filterChain.doFilter(request, response);
         }
 
-    }
-
-    @Override
-    public void destroy() {
-        Filter.super.destroy();
     }
 }

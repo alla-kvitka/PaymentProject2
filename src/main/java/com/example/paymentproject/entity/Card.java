@@ -27,16 +27,6 @@ public class Card {
     public Card() {
     }
 
-    public static Card createCard(User user) {
-        Card card = new Card();
-        card.setUserId(user.getUserId());
-        card.setCardSum(4000);
-        card.setCardStatus(CardStatus.ACTIVE);
-        card.setBillId(user.getUserBill());
-        card.setUserStatus(user.getUserStatus());
-        card.setUserRequest(UserRequest.NO_REQUEST);
-        return card;
-    }
 
     public UserRequest getUserRequest() {
         return userRequest;

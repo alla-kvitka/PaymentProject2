@@ -6,6 +6,7 @@ import com.example.paymentproject.entity.Enums.CardStatus;
 import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.impl.CardServiceImpl;
 import com.example.paymentproject.service.impl.UserServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,9 +19,10 @@ import java.util.List;
 
 @WebServlet(name = "user-cards", value = "/user-cards")
 public class UserCardsController extends HttpServlet {
-
+    private static final Logger LOGGER = Logger.getLogger(UserCardsController.class);
     CardServiceImpl cardService = new CardServiceImpl();
     UserServiceImpl userService = new UserServiceImpl();
+    User user;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -36,13 +38,14 @@ public class UserCardsController extends HttpServlet {
                 login = cookie.getValue();
             }
         }
-        User user = userService.getUserInfo(login);
+        user = userService.getUserInfo(login);
         List<Card> cardsList = cardService.findAllUserCards(user.getUserId(), page, size);
         int noOfRecords = userService.countOfAllUserCards(user.getUserId());
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / size);
         req.setAttribute("cards", cardsList);
         req.setAttribute("noOfPages", noOfPages);
         req.setAttribute("currentPage", page);
+        LOGGER.info("User" + user.getUserId() + " get information about cards " + cardsList);
         getServletContext().getRequestDispatcher("/WEB-INF/views/user/card/cardInformation.jsp")
                 .forward(req, resp);
     }
@@ -53,8 +56,10 @@ public class UserCardsController extends HttpServlet {
         Card card = cardService.searchCardByCardId(cardId);
         if (req.getParameter("button1") != null && card.getCardStatus().equals(CardStatus.ACTIVE)) {
             cardService.blockCard(cardId);
+            LOGGER.info("User " + user.getUserId() + " blocked card");
         } else if (req.getParameter("button2") != null && card.getCardStatus().equals(CardStatus.BLOCKED)) {
             cardService.requestToUnblock(cardId);
+            LOGGER.info("User" + user.getUserId() + " send request to unblock");
         }
         req.getRequestDispatcher("/WEB-INF/views/user/card/cardInformation.jsp").forward(req, resp);
     }

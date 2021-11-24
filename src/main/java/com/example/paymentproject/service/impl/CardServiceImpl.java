@@ -2,7 +2,10 @@ package com.example.paymentproject.service.impl;
 
 import com.example.paymentproject.dao.impl.CardDaoImpl;
 import com.example.paymentproject.entity.Card;
+import com.example.paymentproject.entity.Enums.CardStatus;
+import com.example.paymentproject.entity.Enums.UserRequest;
 import com.example.paymentproject.entity.Payment;
+import com.example.paymentproject.entity.User;
 import com.example.paymentproject.service.interfaces.CardService;
 
 import java.sql.SQLException;
@@ -10,6 +13,19 @@ import java.util.List;
 
 public class CardServiceImpl implements CardService {
     CardDaoImpl cardDao = new CardDaoImpl();
+
+
+    public  Card createCard(User user) {
+        Card card = new Card();
+        card.setUserId(user.getUserId());
+        card.setCardSum(4000);
+        card.setCardStatus(CardStatus.ACTIVE);
+        card.setBillId(user.getUserBill());
+        card.setUserStatus(user.getUserStatus());
+        card.setUserRequest(UserRequest.NO_REQUEST);
+        return card;
+    }
+
 
     @Override
     public Card insertCard(Card card) throws SQLException {
